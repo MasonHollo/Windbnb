@@ -1,4 +1,4 @@
-# `<name of application here>`
+# `Windbnb`
 
 ## Database Schema Design
 
@@ -50,7 +50,7 @@ Returns the information about the current user that is logged in.
 * Require Authentication: false
 * Request
   * Method: get 
-  * Route path: /Users/:id
+  * Route path: /users/:id
   * Body: none
 
 * Successful Response when there is a logged in user
@@ -91,7 +91,7 @@ information.
 * Require Authentication: false
 * Request
   * Method: post
-  * Route path: /Users/login
+  * Route path: /users/login
   * Headers:
     * Content-Type: application/json
   * Body:
@@ -157,7 +157,7 @@ user's information.
 * Require Authentication: false
 * Request
   * Method: post
-  * Route path:  Users/newUser
+  * Route path:  /users/newUser
   * Headers:
     * Content-Type: application/json
   * Body:
@@ -620,7 +620,7 @@ Returns all the reviews written by the current user.
 * Require Authentication: true
 * Request
   * Method: get
-  * Route path: /Reviews/:userId
+  * Route path: /reviews/:userId
   * Body: none
 
 * Successful Response
@@ -676,7 +676,7 @@ Returns all the reviews that belong to a spot specified by id.
 * Require Authentication: false
 * Request
   * Method: get
-  * Route path: /Reviews/:spotId
+  * Route path: /reviews/:spotId
   * Body: none
 
 * Successful Response
@@ -968,7 +968,7 @@ Return all the bookings that the current user has made.
 * Require Authentication: true
 * Request
   * Method: get
-  * Route path: 
+  * Route path: /bookings/userId
   * Body: none
 
 * Successful Response
@@ -1081,7 +1081,7 @@ Create and return a new booking from a spot specified by id.
 * Require proper authorization: Spot must NOT belong to the current user
 * Request
   * Method: post
-  * Route path: /Booking/newBooking
+  * Route path: /bookings/newBooking
   * Headers:
     * Content-Type: application/json
   * Body:
@@ -1376,7 +1376,7 @@ Return spots filtered by query parameters.
 * Require Authentication: false
 * Request
   * Method: get
-  * Route path: /spots/
+  * Route path: /spots/?
   * Query Parameters
     * page: integer, minimum: 1, default: 1
     * size: integer, minimum: 1, maximum: 20, default: 20
