@@ -23,9 +23,11 @@ router.use('/session', sessionRouter);
 
 router.use('/users', usersRouter);
 
-router.post('/test', (req, res) => {
+// Keep this route to test frontend setup in Mod 5
+router.post('/test', function (req, res) {
   res.json({ requestBody: req.body });
 });
+
 
 //Routes
 router.post('/test', function(req, res) {
@@ -44,9 +46,7 @@ router.get('/set-token-cookie', async (_req, res) => {
 });
 
 // GET /api/restore-user
-router.get(
-  '/restore-user',
-  (req, res) => {
+router.get('/restore-user', (req, res) => {
     return res.json(req.user);
   }
 );
