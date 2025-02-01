@@ -1,8 +1,13 @@
 
 //Express Imports
 const router = require('express').Router();
+//place in express imports
+const sessionRouter = require('./session.js');
+const usersRouter = require('./users.js');
+
 //Sequelize Imports
 const { User } = require('../../db/models');
+
 
 //Middleware Imports
 const { setTokenCookie } = require('../../utils/auth.js');
@@ -11,6 +16,16 @@ const { requireAuth } = require('../../utils/auth.js');
 
 //Middleware
 router.use(restoreUser);
+
+//routes for api (place under middlewares)
+
+router.use('/session', sessionRouter);
+
+router.use('/users', usersRouter);
+
+router.post('/test', (req, res) => {
+  res.json({ requestBody: req.body });
+});
 
 //Routes
 router.post('/test', function(req, res) {
