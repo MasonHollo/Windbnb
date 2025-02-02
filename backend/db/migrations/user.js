@@ -56,4 +56,3 @@ module.exports = {
     return queryInterface.dropTable(options);
   }
 };
-
