@@ -1,11 +1,8 @@
 'use strict';
 
-const { all } = require("../../routes");
-const { sequelize } = require("../models");
-
 let options = {};
 if (process.env.NODE_ENV === 'production') {
-  options.schema = process.env.SCHEMA;  // define your schema in options object
+  options.schema = process.env.SCHEMA;
 }
 
 module.exports = {
@@ -21,18 +18,18 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
-            model: 'Users', 
-            key: 'id' 
-          }
+          model: 'Users',
+          key: 'id'
+        },
+        onDelete: 'CASCADE'
       },
       address: {
         type: Sequelize.STRING(50),
-        allowNull: false,
-        unique: true
+        allowNull: false
       },
       city: {
         type: Sequelize.STRING(50),
-        allowNull: false,
+        allowNull: false
       },
       state: {
         type: Sequelize.STRING(50),
@@ -42,32 +39,33 @@ module.exports = {
         type: Sequelize.STRING(50),
         allowNull: false
       },
-      lat:{
-        type: Sequelize.DECIMAL,
-        allowNull: false,
-        unique: true
+      lat: {
+        type: Sequelize.FLOAT,
+        allowNull: false
       },
-      lng:{
-        type: Sequelize.DECIMAL,
-        allowNull: false,
-        unique: true
+      lng: {
+        type: Sequelize.FLOAT,
+        allowNull: false
       },
-      name:{
+      name: {
         type: Sequelize.STRING(50),
-        allowNull: false,
-        unique: true
+        allowNull: false
       },
-      description:{ 
-        type: Sequelize.STRING(250)
+      description: {
+        type: Sequelize.TEXT,
+        allowNull: false
       },
       price: {
-        type: Sequelize.DECIMAL(10, 2)
+        type: Sequelize.DECIMAL(10, 2),
+        allowNull: false
       },
-      previewImage:{
-        type: Sequelize.STRING
+      previewImage: {
+        type: Sequelize.STRING,
+        allowNull: true
       },
-      avgRating:{
-        type: Sequelize.FLOAT
+      avgRating: {
+        type: Sequelize.FLOAT,
+        allowNull: true
       },
       createdAt: {
         allowNull: false,

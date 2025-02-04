@@ -1,68 +1,65 @@
 'use strict';
 
-const { Spot } = require('../models');  
-const bcrypt = require("bcryptjs");
+const { Spot } = require('../models');
 
-console.log(Spot);
 let options = {};
 if (process.env.NODE_ENV === 'production') {
-  options.schema = process.env.SCHEMA;  // define your schema in options object
+  options.schema = process.env.SCHEMA;
 }
 
 module.exports = {
-  async up (queryInterface, Sequelize) {
+  async up(queryInterface, Sequelize) {
     await Spot.bulkCreate([
       {
         ownerId: 1,
-        address: '24 Willie Mays Plaza',
-        city: 'San Francisco',
-        state: 'california',
-        country: 'United States',
-        lat:'37.778572',
-        lng:'-122.389717',
-        name: 'SF Giants',
-        description: 'SF Giants stadium',
-        price:'39.444',
-        previewImage:'https://upload.wikimedia.org/wikipedia/commons/8/8e/Oracle_Park_2021.jpg' ,
-        avgRating:5.0
+        address: "123 Disney Lane",
+        city: "San Francisco",
+        state: "California",
+        country: "United States of America",
+        lat: 37.7645358,
+        lng: -122.4730327,
+        name: "App Academy",
+        description: "Place where web developers are created",
+        price: 123,
+        previewImage: "https://example.com/image1.jpg",
+        avgRating: 4.5
       },
       {
         ownerId: 2,
-        address: '400 Ballpark Dr',
-        city: ' West Sacramento',
-        state: 'california',
-        country: 'United States',
-        lat:'38.344934',
-        lng:'121.304968',
-        name: 'Sutter Health Park',
-        description: 'Rivercats baseball stadium',
-        price:'9933.99',
-        previewImage: 'https://www.sacbee.com/latest-news/5r7msx/picture249671663/alternates/LANDSCAPE_1140/RB_River_Cats_Giants.JPG',
-        avgRating: 3.5
+        address: "456 Ocean Drive",
+        city: "Miami",
+        state: "Florida",
+        country: "United States of America",
+        lat: 25.7617,
+        lng: -80.1918,
+        name: "Beachside Bungalow",
+        description: "A relaxing beachside retreat",
+        price: 200,
+        previewImage: "https://example.com/image2.jpg",
+        avgRating: 4.8
       },
       {
         ownerId: 3,
-        address: '347 Don Shula Dr Suite 102',
-        city: 'Miami Gardens',
-        state: 'Florida',
-        country: 'United States',
-        lat:'25.957960',
-        lng:'-80.239311',
-        name: 'Hard Rock Stadium',
-        description: 'Miami Dolphins Football stadium',
-        price:'1447.67',
-        previewImage: 'https://media-cdn.tripadvisor.com/media/attractions-splice-spp-674x446/14/53/31/ed.jpg' ,
-        avgRating: 2.5
+        address: "789 Mountain Road",
+        city: "Denver",
+        state: "Colorado",
+        country: "United States of America",
+        lat: 39.7392,
+        lng: -104.9903,
+        name: "Mountain Cabin",
+        description: "A cozy cabin in the mountains",
+        price: 150,
+        previewImage: "https://example.com/image3.jpg",
+        avgRating: 4.7
       }
     ], { validate: true });
   },
 
-  async down (queryInterface, Sequelize) {
+  async down(queryInterface, Sequelize) {
     options.tableName = 'Spots';
     const Op = Sequelize.Op;
     return queryInterface.bulkDelete(options, {
-      name: { [Op.in]: ['SF Giants', 'Sutter Health Park', 'Hard Rock Stadium'] }
+      name: { [Op.in]: ["App Academy", "Beachside Bungalow", "Mountain Cabin"] }
     }, {});
   }
 };
-
