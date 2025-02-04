@@ -1,5 +1,6 @@
 'use strict';
 
+const { all } = require("../../routes");
 const { sequelize } = require("../models");
 
 let options = {};
@@ -41,6 +42,16 @@ module.exports = {
         type: Sequelize.STRING(50),
         allowNull: false
       },
+      lat:{
+        type: Sequelize.DECIMAL,
+        allowNull: false,
+        unique: true
+      },
+      lng:{
+        type: Sequelize.DECIMAL,
+        allowNull: false,
+        unique: true
+      },
       name:{
         type: Sequelize.STRING(50),
         allowNull: false,
@@ -50,7 +61,13 @@ module.exports = {
         type: Sequelize.STRING(250)
       },
       price: {
-        type: Sequelize.INTEGER
+        type: Sequelize.DECIMAL(10, 2)
+      },
+      previewImage:{
+        type: Sequelize.STRING
+      },
+      avgRating:{
+        type: Sequelize.FLOAT
       },
       createdAt: {
         allowNull: false,

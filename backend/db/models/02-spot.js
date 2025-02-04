@@ -48,6 +48,14 @@ module.exports = (sequelize, DataTypes) => {
           len: [1, 50],
         }
       },
+      lat:{
+        type: DataTypes.DECIMAL(9,6),
+        allowNull: false
+      },
+      lng:{
+        type: DataTypes.DECIMAL(9,6),
+        allowNull: false
+      },
       name: {
         type: DataTypes.STRING,
         allowNull: false,
@@ -64,11 +72,20 @@ module.exports = (sequelize, DataTypes) => {
         }
       },
       price:{
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        validate: {
-            min: 1,
-            max:99
+        type: DataTypes.DECIMAL(10,2),
+        allowNull: false
+      },
+      previewImage:{
+        type: DataTypes.STRING,
+        validate:{
+            isUrl: true
+        }
+      },
+      avgRating:{
+        type: DataTypes.FLOAT,
+        validate:{
+            min:0,
+            max:5
         }
       }
     },

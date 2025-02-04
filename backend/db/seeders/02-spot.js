@@ -18,9 +18,13 @@ module.exports = {
         city: 'San Francisco',
         state: 'california',
         country: 'United States',
+        lat:'37.778572',
+        lng:'-122.389717',
         name: 'SF Giants',
         description: 'SF Giants stadium',
-        price:'39'
+        price:'39.444',
+        previewImage:'https://upload.wikimedia.org/wikipedia/commons/8/8e/Oracle_Park_2021.jpg' ,
+        avgRating:5.0
       },
       {
         ownerId: 2,
@@ -28,9 +32,13 @@ module.exports = {
         city: ' West Sacramento',
         state: 'california',
         country: 'United States',
+        lat:'38.344934',
+        lng:'121.304968',
         name: 'Sutter Health Park',
         description: 'Rivercats baseball stadium',
-        price:'99'
+        price:'9933.99',
+        previewImage: 'https://www.sacbee.com/latest-news/5r7msx/picture249671663/alternates/LANDSCAPE_1140/RB_River_Cats_Giants.JPG',
+        avgRating: 3.5
       },
       {
         ownerId: 3,
@@ -38,9 +46,13 @@ module.exports = {
         city: 'Miami Gardens',
         state: 'Florida',
         country: 'United States',
+        lat:'25.957960',
+        lng:'-80.239311',
         name: 'Hard Rock Stadium',
         description: 'Miami Dolphins Football stadium',
-        price:''
+        price:'1447.67',
+        previewImage: 'https://media-cdn.tripadvisor.com/media/attractions-splice-spp-674x446/14/53/31/ed.jpg' ,
+        avgRating: 2.5
       }
     ], { validate: true });
   },
