@@ -6,23 +6,6 @@ const { Spot } = require('../../db/models');
 
 const router = express.Router();
 
-router.get('/:spotId', async (req, res) => {
-    const { spotId } = req.params;
-    
-    const spot = await Spot.findByPk(spotId);
-
-    if (!spot) {
-        return res.status(404).json({
-            title: "Resource Not Found",
-            message: "The requested resource couldn't be found.",
-            errors: { message: "The requested resource couldn't be found." }
-        });
-    }
-
-    return res.json(spot);
-});
-
-
 const validateSpot = [
   check('address')
     .exists({ checkFalsy: true })
@@ -54,6 +37,38 @@ const validateSpot = [
     .withMessage('Price per day must be a positive number'),
   handleValidationErrors
 ];
+
+//get spots owned by currnet user
+router.get('/current', requireAuth, async (req, res) => {
+  try {
+      const userId = req.user.id; 
+      const spots = await Spot.findAll({
+          where: { ownerId: userId }
+      });
+
+      return res.status(200).json({ Spots: spots });
+  } catch (error) {
+      return res.status(500).json({ message: 'Something went wrong', error: error.message });
+  }
+});
+
+
+router.get('/:spotId', async (req, res) => {
+    const { spotId } = req.params;
+    
+    const spot = await Spot.findByPk(spotId);
+
+    if (!spot) {
+        return res.status(404).json({
+            // title: "Resource Not Found",
+            message: "Spot not found.",
+            // errors: { message: "The requested resource couldn't be found." }
+        });
+    }
+    return res.json(spot);
+});
+
+
 
 router.get('/', async (req, res) => {
   const spots = await Spot.findAll();
