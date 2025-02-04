@@ -1,102 +1,71 @@
 'use strict';
-
-const { Model, Validator } = require('sequelize');
+const { Model } = require('sequelize');
 
 module.exports = (sequelize, DataTypes) => {
   class Spot extends Model {
     static associate(models) {
-        Spot.belongsTo(models.User, { foreignKey: 'ownerId' }); 
+      Spot.belongsTo(models.User, { foreignKey: 'ownerId', as: 'Owner' });
+      // Spot.hasMany(models.Review, { foreignKey: 'spotId', onDelete: 'CASCADE' });
+      // Spot.hasMany(models.Booking, { foreignKey: 'spotId', onDelete: 'CASCADE' });
+      // Spot.hasMany(models.SpotImage, { foreignKey: 'spotId', onDelete: 'CASCADE' });
     }
-    
   }
 
   Spot.init(
     {
-      ownerId:{
+      ownerId: {
         type: DataTypes.INTEGER,
         allowNull: false,
-        references: {
-            model: 'Users',
-            key: 'id'
-          }
+        references: { model: 'Users' }
       },
-      address:{
-        type: DataTypes.STRING,
-        allowNull: false,
-        validate:{
-            len: [1, 50]
-        }
-      },
-      city: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        validate: {
-          len: [3, 50]
-          },
-        },
-      state: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        validate: {
-          len: [2, 50],
-        },
-      },
-      country: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        validate: {
-          len: [1, 50],
-        }
-      },
-      lat:{
-        type: DataTypes.DECIMAL(9,6),
+      address: {
+        type: DataTypes.STRING(50),
         allowNull: false
       },
-      lng:{
-        type: DataTypes.DECIMAL(9,6),
+      city: {
+        type: DataTypes.STRING(50),
+        allowNull: false
+      },
+      state: {
+        type: DataTypes.STRING(50),
+        allowNull: false
+      },
+      country: {
+        type: DataTypes.STRING(50),
+        allowNull: false
+      },
+      lat: {
+        type: DataTypes.FLOAT,
+        allowNull: false
+      },
+      lng: {
+        type: DataTypes.FLOAT,
         allowNull: false
       },
       name: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        unique: true,
-        validate: {
-            len: [1,50]
-        }
-      },
-      description:{
-        type: DataTypes.STRING,
-        allowNull: false,
-        validate: {
-            len: [1, 250]
-        }
-      },
-      price:{
-        type: DataTypes.DECIMAL(10,2),
+        type: DataTypes.STRING(50),
         allowNull: false
       },
-      previewImage:{
-        type: DataTypes.STRING,
-        validate:{
-            isUrl: true
-        }
+      description: {
+        type: DataTypes.TEXT,
+        allowNull: false
       },
-      avgRating:{
+      price: {
+        type: DataTypes.DECIMAL(10, 2),
+        allowNull: false
+      },
+      previewImage: {
+        type: DataTypes.STRING,
+        allowNull: true
+      },
+      avgRating: {
         type: DataTypes.FLOAT,
-        validate:{
-            min:0,
-            max:5
-        }
+        allowNull: true
       }
     },
     {
       sequelize,
-      modelName: 'Spot',
-      defaultScope: {
-        // attributes: {
-        //   exclude: ['hashedPassword', 'email', 'createdAt', 'updatedAt'],
-        // },
-      },
+      modelName: 'Spot'
     }
   );
   return Spot;
