@@ -6,6 +6,23 @@ const { Spot } = require('../../db/models');
 
 const router = express.Router();
 
+router.get('/:spotId', async (req, res) => {
+    const { spotId } = req.params;
+    
+    const spot = await Spot.findByPk(spotId);
+
+    if (!spot) {
+        return res.status(404).json({
+            title: "Resource Not Found",
+            message: "The requested resource couldn't be found.",
+            errors: { message: "The requested resource couldn't be found." }
+        });
+    }
+
+    return res.json(spot);
+});
+
+
 const validateSpot = [
   check('address')
     .exists({ checkFalsy: true })
