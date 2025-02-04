@@ -1,5 +1,6 @@
 'use strict';
 
+const { all } = require("../../routes");
 const { sequelize } = require("../models");
 
 let options = {};
@@ -9,34 +10,64 @@ if (process.env.NODE_ENV === 'production') {
 
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Users', {
+    await queryInterface.createTable('Spots', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      firstName: {
-        type: Sequelize.STRING(50),
-        allowNull: false
+      ownerId: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+            model: 'Users', 
+            key: 'id' 
+          }
       },
-      lastName: {
+      address: {
         type: Sequelize.STRING(50),
-        allowNull: false
-      },
-      username: {
-        type: Sequelize.STRING(30),
         allowNull: false,
         unique: true
       },
-      email: {
-        type: Sequelize.STRING(256),
+      city: {
+        type: Sequelize.STRING(50),
+        allowNull: false,
+      },
+      state: {
+        type: Sequelize.STRING(50),
+        allowNull: false
+      },
+      country: {
+        type: Sequelize.STRING(50),
+        allowNull: false
+      },
+      lat:{
+        type: Sequelize.DECIMAL,
         allowNull: false,
         unique: true
       },
-      hashedPassword: {
-        type: Sequelize.STRING.BINARY,
-        allowNull: false
+      lng:{
+        type: Sequelize.DECIMAL,
+        allowNull: false,
+        unique: true
+      },
+      name:{
+        type: Sequelize.STRING(50),
+        allowNull: false,
+        unique: true
+      },
+      description:{ 
+        type: Sequelize.STRING(250)
+      },
+      price: {
+        type: Sequelize.DECIMAL(10, 2)
+      },
+      previewImage:{
+        type: Sequelize.STRING
+      },
+      avgRating:{
+        type: Sequelize.FLOAT
       },
       createdAt: {
         allowNull: false,
@@ -52,7 +83,7 @@ module.exports = {
   },
 
   async down(queryInterface, Sequelize) {
-    options.tableName = "Users";
+    options.tableName = "Spots";
     return queryInterface.dropTable(options);
   }
 };
