@@ -131,4 +131,42 @@ router.delete('/:spotId', requireAuth, async (req, res) => {
     });
   }
 });
+
+// Edit A Spot
+
+router.put('/:spotId', requireAuth, validateSpot, async (req, res) => {
+  try {
+    const { spotId } = req.params;
+    const { user } = req;
+    const { address, city, state, country, lat, lng, name, description, price } = req.body;
+
+
+    const spot = await Spot.findByPk(spotId);
+
+    if (!spot) {
+      return res.status(404).json({
+        message: "Spot not found."
+      });
+    }
+
+    if (spot.ownerId !== user.id) {
+      return res.status(403).json({
+        message: "Forbidden"
+      });
+    }
+
+    await spot.update({
+      address, city, state, country, lat, lng, name, description, price
+    });
+
+
+    return res.status(200).json(spot);
+
+  } catch (e) {
+    return res.status(500).json({
+      message: "Something went wrong",
+      error: error.message
+    });
+  }
+});
 module.exports = router;
