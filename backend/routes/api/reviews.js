@@ -5,7 +5,8 @@ const { Review } = require('../../db/models');
 
 const router = express.Router();
 
-router.get('/', requireAuth, async (req, res) => {
+//
+router.get('/current', requireAuth, async (req, res) => {
   const reviews = await Review.findAll({ where: { userId: req.user.id } });
   res.json({ Reviews: reviews });
 });
@@ -19,7 +20,7 @@ router.post('/:spotId', requireAuth, async (req, res) => {
     userId: req.user.id,
     review,
     stars
-  });
+  }); 
 
   return res.status(201).json(newReview);
 });
