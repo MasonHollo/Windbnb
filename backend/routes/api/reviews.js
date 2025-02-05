@@ -1,23 +1,19 @@
 const express = require('express');
 const { check } = require('express-validator');
 const { requireAuth } = require('../../utils/auth');
-const { Review } = require('../../db/models');
-const { Spot } = require('../../db/models');
-const { SpotImage } = require("../../db/models");
-const { User } = require("../../db/models");
-const { ReviewImage } = require("../../db/models");
+const { Review, Spot, SpotImage, User, ReviewImage } = require('../../db/models');
 
 
 const router = express.Router();
 
-//
+//get all reviews of current user.
 router.get('/current', requireAuth, async (req, res) => {
   const reviews = await Review.findAll({ 
     where: { userId: req.user.id },
     include: [
       {
         model: User,
-        attributes: ['id', 'firstName', 'lastName'] // Limit fields
+        attributes: ['id', 'firstName', 'lastName']
       },
       {
         model: Spot,
@@ -35,18 +31,11 @@ router.get('/current', requireAuth, async (req, res) => {
   res.json({ Reviews: reviews });
 });
 
-router.post('/:spotId', requireAuth, async (req, res) => {
-  const { spotId } = req.params;
-  const { review, stars } = req.body;
-  
-  const newReview = await Review.create({
-    spotId,
-    userId: req.user.id,
-    review,
-    stars
-  }); 
-
-  return res.status(201).json(newReview);
-});
+//add a image to a review from review Id
+router.post("/:reviewId/images", async (req, res) => {
+  return res.status(200).json({
+    message: "this route works"
+  })
+})
 
 module.exports = router;

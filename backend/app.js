@@ -3,6 +3,7 @@ const express = require('express');
 require('express-async-errors');
 const routes = require('./routes');
 
+
 //SECURITY IMPORTS
 const morgan = require('morgan');
 const cors = require('cors');
@@ -50,6 +51,7 @@ app.use(
 
 //ROUTES!!!
 app.use(routes); 
+
 
 
 // Catch unhandled requests and forward to error handler.
