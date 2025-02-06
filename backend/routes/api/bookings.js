@@ -7,6 +7,7 @@ const { Booking, Spot, User } = require('../../db/models');
 
 const router = express.Router();
 
+
 router.get('/current', requireAuth, async (req, res) => {
   const bookings = await Booking.findAll({
     where: { userId: req.user.id },
@@ -19,6 +20,7 @@ router.get('/current', requireAuth, async (req, res) => {
   res.json({ Bookings: bookings });
 });
 
+//
 router.post('/:spotId', requireAuth, async (req, res) => {
   const { spotId } = req.params;
   const { startDate, endDate } = req.body;

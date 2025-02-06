@@ -7,6 +7,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       Review.belongsTo(models.User, { foreignKey: 'userId' });
       Review.belongsTo(models.Spot, { foreignKey: 'spotId' });
+      Review.hasMany(models.ReviewImage, { foreignKey: 'reviewId' })
     }
   }
 
@@ -30,6 +31,10 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.INTEGER,
         allowNull: false,
         validate: { min: 1, max: 5 }
+      },
+      reviewImage: {
+        type: DataTypes.STRING,
+        references: { model: 'ReviewImages', key: 'id'}
       }
     },
     {
