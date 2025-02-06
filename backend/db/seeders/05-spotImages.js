@@ -13,17 +13,20 @@ module.exports = {
     {
         url:  "test img",
         preview: true,
-        spotId: 1
+        spotId: 1,
+        userId:1
     },
     {
         url:  "test img",
         preview: true,
-        spotId: 2
+        spotId: 2,
+        userId: 2
     },
     {
       url:  "test img",
       preview: true,
-      spotId: 3
+      spotId: 3,
+      userId: 3
      }
     ], { validate: true });
   },
