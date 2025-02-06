@@ -75,7 +75,7 @@ router.delete('/:reviewId', requireAuth, async (req, res) => {
   }
 });
 
-// Edit A Review ------ still needs work ------
+// Edit A Review 
 router.put('/:reviewId', requireAuth, async (req, res) => {
   try {
     const { reviewId } = req.params;
@@ -85,7 +85,13 @@ router.put('/:reviewId', requireAuth, async (req, res) => {
 
     const reviews = await Review.findByPk(reviewId);
 
-    if (reviews.ownerId !== user.id) {
+    if (!review) {
+      return res.status(404).json({
+        message: "review couldn't be found"
+      });
+    }
+
+    if (reviews.userId !== user.id) {
       return res.status(403).json({
         message: "Forbidden"
       });
