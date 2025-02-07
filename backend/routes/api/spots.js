@@ -28,7 +28,8 @@ const validateSpot = [
   check('name')
     .exists({ checkFalsy: true })
     .isLength({ max: 50 })
-    .withMessage('Name must be less than 50 characters'),
+    .withMessage('Name must be less than 50 characters')
+    .withMessage('Name is required'),
   check('description')
     .exists({ checkFalsy: true })
     .withMessage('Description is required'),
@@ -37,6 +38,17 @@ const validateSpot = [
     .withMessage('Price per day must be a positive number'),
   handleValidationErrors
 ];
+
+const validateReview = [
+  check('review')
+  .exists({ checkFalsy: true })
+  .withMessage("Review text is required"),
+check('stars')
+  .isFloat({ min: 1, max:5 })
+  .withMessage("Stars must be an integer from 1 to 5"),
+handleValidationErrors
+
+]
 
 //get spots owned by currnet user
 router.get('/current', requireAuth, async (req, res) => {
@@ -54,77 +66,93 @@ router.get('/current', requireAuth, async (req, res) => {
 
 
 router.get('/:spotId', async (req, res) => {
-  const { spotId } = req.params;
+  try {
+    const { spotId } = req.params;
 
-  const spot = await Spot.findByPk(spotId, {
-    include: [
-      {
-        model: SpotImage,
-        attributes: ['id', 'url', 'preview']
-      },
-      {
-        model: User,
-        as: 'Owner',
-        attributes: ['id', 'firstName', 'lastName']
-      },
-      {
-        model: Review,
-        attributes: ['id', 'userId', 'stars', 'review', 'createdAt', 'updatedAt'],
-      }
-    ]
-  });
+    const spot = await Spot.findByPk(spotId, {
+      include: [
+        {
+          model: SpotImage,
+          attributes: ['id', 'url', 'preview']
+        },
+        {
+          model: User,
+          as: 'Owner',
+          attributes: ['id', 'firstName', 'lastName']
+        },
+        {
+          model: Review,
+          attributes: ['id', 'userId', 'stars', 'review', 'createdAt', 'updatedAt'],
+        }
+      ]
 
-  if (!spot) {
-    return res.status(404).json({
-      message: "Spot not found."
     });
+
+    if (!spot) {
+      return res.status(404).json({
+        message: "Spot couldn't be found"
+      });
+    }
+    return res.json({
+      id: spot.id,
+      ownerId: spot.ownerId,
+      address: spot.address,
+      city: spot.city,
+      state: spot.state,
+      country: spot.country,
+      lat: spot.lat,
+      lng: spot.lng,
+      name: spot.name,
+      description: spot.description,
+      price: spot.price,
+      createdAt: spot.createdAt,
+      updatedAt: spot.updatedAt,
+      avgRating: spot.star,
+      SpotImages: spot.SpotImages,
+      Owner: spot.Owner,
+      Reviews: spot.Reviews
+    });
+
+  } catch (error) {
+    return res.status(500).json({ message: 'Something went wrong', error: error.message });
   }
-  return res.json({
-    id: spot.id,
-    ownerId: spot.ownerId,
-    address: spot.address,
-    city: spot.city,
-    state: spot.state,
-    country: spot.country,
-    lat: spot.lat,
-    lng: spot.lng,
-    name: spot.name,
-    description: spot.description,
-    price: spot.price,
-    createdAt: spot.createdAt,
-    updatedAt: spot.updatedAt,
-    avgRating: spot.star,
-    SpotImages: spot.SpotImages,
-    Owner: spot.Owner,
-    Reviews: spot.Reviews
-  });
 });
 
 
-
+//GET ALL SPOTS
 router.get('/', async (req, res) => {
-  const spots = await Spot.findAll();
-  res.status(200).json({ Spots: spots });
+  try {
+    const spots = await Spot.findAll();
+    res.status(200).json({ Spots: spots });
+  } catch (error) {
+    return res.status(500).json({ message: 'Something went wrong', error: error.message });
+  }
 });
 
+
+//CREATE A SPOT
 router.post('/', requireAuth, validateSpot, async (req, res) => {
-  const { address, city, state, country, lat, lng, name, description, price } = req.body;
-  const { user } = req;
+  try {
+    const { address, city, state, country, lat, lng, name, description, price } = req.body;
+    const { user } = req;
 
-  const newSpot = await Spot.create({
-    ownerId: user.id,
-    address,
-    city,
-    state,
-    country,
-    lat,
-    lng,
-    name,
-    description,
-    price
-  });
+    const newSpot = await Spot.create({
+      ownerId: user.id,
+      address,
+      city,
+      state,
+      country,
+      lat,
+      lng,
+      name,
+      description,
+      price
+    });
 
-  return res.status(201).json(newSpot);
+    return res.status(201).json(newSpot);
+  } catch (error) {
+    return res.status(500).json({ message: 'Something went wrong', error: error.message });
+  }
 });
 
 //Delete a Spot
@@ -203,9 +231,10 @@ router.put('/:spotId', requireAuth, validateSpot, async (req, res) => {
 
 // Add Image to Spot
 router.post('/:spotId/images', requireAuth, async (req, res) => {
-  const { spotId } = req.params;
-  const { url, preview } = req.body;
-  const { user } = req;
+  try {
+    const { spotId } = req.params;
+    const { url, preview, userId } = req.body;
+    const { user } = req;
 
     const spot = await Spot.findByPk(spotId);
 
@@ -224,43 +253,72 @@ router.post('/:spotId/images', requireAuth, async (req, res) => {
     const newImage = await SpotImage.create({
       spotId,
       url,
-      preview
+      preview,
+      userId
     });
 
     return res.status(200).json({
       id: newImage.id,
       url: newImage.url,
-      preview: newImage.preview
+      preview: newImage.preview,
     });
-  } 
-);
+  } catch (error) {
+    return res.status(500).json({ message: 'Something went wrong', error: error.message });
+  }
+});
 
 
 //CREATE A REVIEW FOR A SPOT BASED ON SPOTID
-router.post('/:spotId/reviews', requireAuth, async (req, res) => {
-  const { spotId } = req.params;
-  const { review, stars } = req.body;
-  
-  const newReview = await Review.create({
-    spotId,
-    userId: req.user.id,
-    review,
-    stars
-  }); 
+router.post('/:spotId/reviews', requireAuth, validateReview, async (req, res) => {
+  try {
+    const { spotId } = req.params;
+    const { review, stars } = req.body;
 
-  return res.status(201).json(newReview);
+    const spot = await Spot.findByPk(spotId)
+
+    if (!spot) {
+      return res.status(404).json({
+        message: "Spot couldn't be found"
+      });
+    }
+
+    const reviews = await Review.findOne({
+      where: {
+        userId: req.user.id,
+        spotId: spot.id
+      }
+    });
+
+    if (reviews) {
+      return res.status(400).json({
+        message: "User already has a review for this spot"
+      });
+    }
+
+    const newReview = await Review.create({
+      userId: req.user.id,
+      spotId,
+      review,
+      stars
+    });
+
+    return res.status(201).json(newReview);
+  } catch (error) {
+    return res.status(500).json({ message: 'Something went wrong', error: error.message });
+  }
 });
 
 //GET ALL REVIEWS BY A SPOTS ID
-router.get('/:spotId/reviews', requireAuth, async (req, res) => {
-  const { spotId } = req.params;
-   const spot = await Spot.findByPk(spotId)
-   
-   if (!spot) {
-    return res.status(404).json({
-      message: "Spot not found."
-    });
-   }
+router.get('/:spotId/reviews', async (req, res) => {
+  try {
+    const { spotId } = req.params;
+    const spot = await Spot.findByPk(spotId)
+
+    if (!spot) {
+      return res.status(404).json({
+        message: "Spot not found."
+      });
+    }
     const reviews = await Review.findAll({
       where: { spotId },
       include: [
@@ -275,6 +333,9 @@ router.get('/:spotId/reviews', requireAuth, async (req, res) => {
       ]
     });
     return res.status(200).json({ Reviews: reviews });
-}); 
+  } catch (error) {
+    return res.status(500).json({ message: 'Something went wrong', error: error.message });
+  }
+});
 
 module.exports = router;

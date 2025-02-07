@@ -20,9 +20,7 @@ module.exports = {
         lng: -122.4730327,
         name: "App Academy",
         description: "Place where web developers are created",
-        price: 123,
-        previewImage: "https://example.com/image1.jpg",
-        avgRating: 4.5
+        price: 123
       },
       {
         ownerId: 2,
@@ -34,9 +32,7 @@ module.exports = {
         lng: -80.1918,
         name: "Beachside Bungalow",
         description: "A relaxing beachside retreat",
-        price: 200,
-        previewImage: "https://example.com/image2.jpg",
-        avgRating: 4.8
+        price: 200
       },
       {
         ownerId: 3,
@@ -48,9 +44,7 @@ module.exports = {
         lng: -104.9903,
         name: "Mountain Cabin",
         description: "A cozy cabin in the mountains",
-        price: 150,
-        previewImage: "https://example.com/image3.jpg",
-        avgRating: 4.7
+        price: 150
       }
     ], { validate: true });
   },
