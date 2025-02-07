@@ -61,7 +61,8 @@ module.exports = {
       },
       spotImage: {
         type: Sequelize.STRING,
-        references: { model: 'SpotImage', key: 'id'}
+        references: { model: 'SpotImages', key: 'id'},
+        allowNull: true
       },
       createdAt: {
         allowNull: false,

@@ -57,7 +57,8 @@ module.exports = (sequelize, DataTypes) => {
       },
       spotImage: {
         type: DataTypes.STRING,
-        references: { model: 'SpotImages', key: 'id'}
+        references: { model: 'SpotImages', key: 'id'},
+        allowNull: true
       }
     },
     {
