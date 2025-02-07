@@ -55,13 +55,9 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.DECIMAL(10, 2),
         allowNull: false
       },
-      previewImage: {
+      spotImage: {
         type: DataTypes.STRING,
-        allowNull: true
-      },
-      avgRating: {
-        type: DataTypes.FLOAT,
-        allowNull: true
+        references: { model: 'SpotImages', key: 'id'}
       }
     },
     {

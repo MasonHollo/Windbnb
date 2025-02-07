@@ -59,13 +59,9 @@ module.exports = {
         type: Sequelize.DECIMAL(10, 2),
         allowNull: false
       },
-      previewImage: {
+      spotImage: {
         type: Sequelize.STRING,
-        allowNull: true
-      },
-      avgRating: {
-        type: Sequelize.FLOAT,
-        allowNull: true
+        references: { model: 'SpotImages', key: 'id'}
       },
       createdAt: {
         allowNull: false,

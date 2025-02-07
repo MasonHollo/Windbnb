@@ -8,7 +8,8 @@ const { Booking, Spot, User } = require('../../db/models');
 const router = express.Router();
 
 
-router.get('/current', requireAuth, async (req, res) => {
+router.get('/current', requireAuth, async (req, res, next) => {
+  try{
   const bookings = await Booking.findAll({
     where: { userId: req.user.id },
     include: {
@@ -18,10 +19,14 @@ router.get('/current', requireAuth, async (req, res) => {
   });
 
   res.json({ Bookings: bookings });
+}catch (error) {
+  return res.status(500).json({ message: 'Something went wrong', error: error.message });
+}
 });
 
 //
 router.post('/:spotId', requireAuth, async (req, res) => {
+  try{
   const { spotId } = req.params;
   const { startDate, endDate } = req.body;
 
@@ -42,9 +47,13 @@ router.post('/:spotId', requireAuth, async (req, res) => {
   });
 
   return res.status(201).json(newBooking);
+}catch (error) {
+  return res.status(500).json({ message: 'Something went wrong', error: error.message });
+}
 });
 
 router.put('/:bookingId', requireAuth, async (req, res) => {
+  try{
   const { bookingId } = req.params;
   const { startDate, endDate } = req.body;
 
@@ -60,9 +69,13 @@ router.put('/:bookingId', requireAuth, async (req, res) => {
   await booking.update({ startDate, endDate });
 
   return res.json(booking);
+}catch (error) {
+  return res.status(500).json({ message: 'Something went wrong', error: error.message });
+}
 });
 
 router.delete('/:bookingId', requireAuth, async (req, res) => {
+  try{
   const { bookingId } = req.params;
 
   const booking = await Booking.findByPk(bookingId);
@@ -77,6 +90,9 @@ router.delete('/:bookingId', requireAuth, async (req, res) => {
   await booking.destroy();
 
   return res.json({ message: "Successfully deleted" });
+}catch (error) {
+  return res.status(500).json({ message: 'Something went wrong', error: error.message });
+}
 });
 
 module.exports = router;

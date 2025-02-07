@@ -2,12 +2,25 @@ const express = require('express');
 const { check } = require('express-validator');
 const { requireAuth } = require('../../utils/auth');
 const { Review, Spot, SpotImage, User, ReviewImage } = require('../../db/models');
+const { handleValidationErrors } = require('../../utils/validation');
 
 
 const router = express.Router();
 
+const validateReview = [
+  check('review')
+  .exists({ checkFalsy: true })
+  .withMessage("Review text is required"),
+check('stars')
+  .isFloat({ min: 1, max:5 })
+  .withMessage("Stars must be an integer from 1 to 5"),
+handleValidationErrors
+
+]
+
 //get all reviews of current user.
 router.get('/current', requireAuth, async (req, res) => {
+  try{
   const reviews = await Review.findAll({
     where: { userId: req.user.id },
     include: [
@@ -19,23 +32,28 @@ router.get('/current', requireAuth, async (req, res) => {
         model: Spot,
         attributes: [
           'id', 'ownerId', 'address', 'city', 'state', 'country',
-          'lat', 'lng', 'name', 'price', 'previewImage'
+          'lat', 'lng', 'name', 'price'
         ]
       },
       {
         model: ReviewImage,
         attributes: ['id', 'url']
       }
-    ]
+    ],
+    attributes: ['id', 'userId', 'spotId', 'review', 'stars', 'createdAt', 'updatedAt'],
   });
   res.json({ Reviews: reviews });
+}catch (error) {
+  return res.status(500).json({ message: 'Something went wrong', error: error.message });
+}
 });
 
 //add a image to a review from review Id 
 router.post("/:reviewId/images", requireAuth, async (req, res) => {
-  const { reviewId } = req.params;
-  const { url } = req.body;
-  const { user } = req;
+  try{
+    const { reviewId } = req.params;
+    const { url } = req.body;
+    const { user } = req;
 
   const reviews = await Review.findByPk(reviewId);
 
@@ -67,9 +85,14 @@ router.post("/:reviewId/images", requireAuth, async (req, res) => {
   });
 
   return res.status(200).json({
+    
     id: newImage.id,
-    url: newImage.url
+    url: newImage.url,
+
   });
+}catch (error) {
+  return res.status(500).json({ message: 'Something went wrong', error: error.message });
+}
 });
 
 //Delete a review
@@ -109,7 +132,7 @@ router.delete('/:reviewId', requireAuth, async (req, res) => {
 });
 
 // Edit A Review 
-router.put('/:reviewId', requireAuth, async (req, res) => {
+router.put('/:reviewId', requireAuth, validateReview, async (req, res) => {
   try {
     const { reviewId } = req.params;
     const { user } = req;
