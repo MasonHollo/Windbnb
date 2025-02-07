@@ -14,11 +14,11 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         allowNull: false
       },
-      reviewId: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        references: { model: 'Reviews', key: 'id' }
-      },
+      // reviewId: {
+      //   type: DataTypes.INTEGER,
+      //   allowNull: false,
+      //   references: { model: 'Reviews', key: 'id' }
+      // },
       userId: {
         type: DataTypes.INTEGER,
         allowNull: true,
