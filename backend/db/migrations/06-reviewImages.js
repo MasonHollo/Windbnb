@@ -23,13 +23,13 @@ module.exports = {
       reviewId: {
         type: Sequelize.INTEGER,
         allowNull: false,
-        references: { model: 'Reviews', key: 'id' },
+        references: { model: 'Review', key: 'id' },
         onDelete: 'CASCADE'
       },
       userId: {
         type: Sequelize.INTEGER,
         allowNull: true,
-        references: { model: 'Users', key: 'id' },
+        references: { model: 'User', key: 'id' },
         onDelete: 'CASCADE'
       },
       createdAt: {

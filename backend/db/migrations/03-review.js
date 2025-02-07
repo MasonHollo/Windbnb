@@ -17,13 +17,13 @@ module.exports = {
       userId: {
         type: Sequelize.INTEGER,
         allowNull: false,
-        references: { model: 'Users', key: 'id' },
+        references: { model: 'User', key: 'id' },
         onDelete: 'CASCADE'
       },
       spotId: {
         type: Sequelize.INTEGER,
         allowNull: false,
-        references: { model: 'Spots', key: 'id' },
+        references: { model: 'Spot', key: 'id' },
         onDelete: 'CASCADE'
       },
       review: {
@@ -38,7 +38,7 @@ module.exports = {
       reviewImage: {
         type: Sequelize.STRING,
         allowNull: true,
-        references: { model: 'ReviewImages', key: 'id'}
+        references: { model: 'ReviewImage', key: 'id'}
       },
       createdAt: {
         allowNull: false,
