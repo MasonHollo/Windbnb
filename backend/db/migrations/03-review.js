@@ -23,7 +23,7 @@ module.exports = {
       spotId: {
         type: Sequelize.INTEGER,
         allowNull: false,
-        references: { modle: 'Spots', key: 'id' },
+        references: { model: 'Spots', key: 'id' },
         onDelete: 'CASCADE'
       },
       review: {
@@ -34,11 +34,6 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: false,
         validate: { min: 1, max: 5 }
-      }, 
-      reviewImage: {
-        type: Sequelize.STRING,
-        allowNull: true,
-        references: { model: 'ReviewImages', key: 'id'}
       },
       createdAt: {
         allowNull: false,
