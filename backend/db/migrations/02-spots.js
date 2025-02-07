@@ -59,11 +59,6 @@ module.exports = {
         type: Sequelize.DECIMAL(10, 2),
         allowNull: false
       },
-      spotImage: {
-        type: Sequelize.STRING,
-        references: { model: 'SpotImages', key: 'id'},
-        allowNull: true
-      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,

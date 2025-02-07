@@ -54,11 +54,6 @@ module.exports = (sequelize, DataTypes) => {
       price: {
         type: DataTypes.DECIMAL(10, 2),
         allowNull: false
-      },
-      spotImage: {
-        type: DataTypes.STRING,
-        references: { model: 'SpotImages', key: 'id'},
-        allowNull: true
       }
     },
     {
