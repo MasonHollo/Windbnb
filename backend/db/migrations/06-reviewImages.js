@@ -20,12 +20,12 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false
       },
-      reviewId: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-        references: { model: 'Reviews', key: 'id' },
-        onDelete: 'CASCADE'
-      },
+      // reviewId: {
+      //   type: Sequelize.INTEGER,
+      //   allowNull: false,
+      //   references: { model: 'Reviews', key: 'id' },
+      //   onDelete: 'CASCADE'
+      // },
       userId: {
         type: Sequelize.INTEGER,
         allowNull: true,
