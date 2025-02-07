@@ -96,3 +96,24 @@ router.delete('/:bookingId', requireAuth, async (req, res) => {
 });
 
 module.exports = router;
+
+
+
+
+
+
+
+/*
+1. Get all spots.           Needs to return 
+   M: GET             ----> numOfReviews & 
+   R: /api/spots            avgStarRating
+                            
+2. Get all spots owned by current user.
+   M: GET             ----> Needs to return avgRating 
+   R: /api/spots/current      & previewImage
+
+3. Get details of a spot from spotId   
+   M: GET
+   R: /
+
+   */  
