@@ -131,4 +131,53 @@ router.delete('/:spotId', requireAuth, async (req, res) => {
     });
   }
 });
+
+router.get('/', async (req, res) => {
+
+  try {
+  const { minLat, maxLat, minLng, maxLng, minPrice, maxPrice, page, size } = req.query;
+  const { Op } = require('sequelize');
+
+  page = parseInt(page);
+  size = parseInt(size);
+
+  if (Number.isNaN(page)) page = 1;
+  if (Number.isNaN(size)) size = 20;
+
+  const query = {};
+
+  if (minLat !== undefined) {
+    query.lat = { [Op.gte]: minLat };
+  }
+  if (maxLat !== undefined) {
+    query.lat = { [Op.lte]: maxLat };
+  }
+
+  if (minLng !== undefined) {
+    query.lat = { [Op.gte]: minLng };
+  }
+  if (maxLng !== undefined) {
+    query.lat = { [Op.lte]: maxLng};
+  }
+  if (minPrice !== undefined) {
+    query.price = { [Op.gte]: minPrice };
+  }
+  if (maxPrice !== undefined) {
+    query.price = { [Op.lte]: maxPrice };
+  }
+
+  const spots = await Spot.findAll({
+    where: query,
+    limit: size,
+    offset: (page - 1) * size
+  });
+
+  res.json({ Spots: spots, page, size });
+
+} catch (error) {
+  return res.status(500).json({ 
+    message: "Something went wrong", 
+    error: error.message });
+}
+});
 module.exports = router;
