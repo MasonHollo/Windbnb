@@ -6,6 +6,8 @@ module.exports = (sequelize, DataTypes) => {
   class Spot extends Model {
     static associate(models) {
       Spot.belongsTo(models.User, { foreignKey: 'ownerId', as: 'Owner' });
+      Spot.belongsTo(models.SpotImage, { foreignKey: 'spotImageId' });
+    
       Spot.hasMany(models.Review, { foreignKey: 'spotId', onDelete: 'CASCADE' });
       Spot.hasMany(models.Booking, { foreignKey: 'spotId', onDelete: 'CASCADE' });
       Spot.hasMany(models.SpotImage, { foreignKey: 'spotId', onDelete: 'CASCADE' });
@@ -57,7 +59,7 @@ module.exports = (sequelize, DataTypes) => {
       },
       spotImage: {
         type: DataTypes.STRING,
-        references: { model: 'SpotImages' },
+        references: { model: 'SpotImages', key: 'id'},
         allowNull: true
       }
     },
