@@ -1,44 +1,40 @@
 'use strict';
 
+const { sequelize } = require("../models");
+
 let options = {};
 if (process.env.NODE_ENV === 'production') {
-  options.schema = process.env.SCHEMA;
+  options.schema = process.env.SCHEMA;  // define your schema in options object
 }
 
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Reviews', {
+    await queryInterface.createTable('SpotImages', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      userId: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-        references: { model: 'Users', key: 'id' },
-        onDelete: 'CASCADE'
+      url: {
+        type: Sequelize.STRING,
+        allowNull: false
       },
+      preview: {
+        type: Sequelize.BOOLEAN,
+        allowNull: false
+      }, 
       spotId: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: { model: 'Spots', key: 'id' },
         onDelete: 'CASCADE'
       },
-      review: {
-        type: Sequelize.STRING,
-        allowNull: false
-      },
-      stars: {
+      userId: {
         type: Sequelize.INTEGER,
-        allowNull: false,
-        validate: { min: 1, max: 5 }
-      }, 
-      reviewImage: {
-        type: Sequelize.STRING,
         allowNull: true,
-        references: { model: 'ReviewImages', key: 'id'}
+        references: { model: 'Users', key: 'id' },
+        onDelete: 'CASCADE'
       },
       createdAt: {
         allowNull: false,
@@ -50,12 +46,11 @@ module.exports = {
         type: Sequelize.DATE,
         defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
       }
-    });
+    }, options);
   },
 
   async down(queryInterface, Sequelize) {
-    options.tableName = "Reviews";
+    options.tableName = "SpotImages";
     return queryInterface.dropTable(options);
   }
 };
-

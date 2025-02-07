@@ -1,6 +1,6 @@
 'use strict';
 
-const { Review } = require('../models');
+const { SpotImage } = require('../models');
 
 let options = {};
 if (process.env.NODE_ENV === 'production') {
@@ -9,30 +9,30 @@ if (process.env.NODE_ENV === 'production') {
 
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await Review.bulkCreate([
-      {
+    await SpotImage.bulkCreate([
+    {
+        url:  "test img",
+        preview: true,
         spotId: 1,
-        userId: 1,
-        review: "Amazing place, very clean!",
-        stars: 5
-      },
-      {
+        userId:1
+    },
+    {
+        url:  "test img",
+        preview: true,
         spotId: 2,
-        userId: 2,
-        review: "Nice spot, but a bit noisy.",
-        stars: 3
-      },
-      {
-        spotId: 3,
-        userId: 3,
-        review: "Great location and host.",
-        stars: 4
-      }
+        userId: 2
+    },
+    {
+      url:  "test img",
+      preview: true,
+      spotId: 3,
+      userId: 3
+     }
     ], { validate: true });
   },
 
   async down(queryInterface, Sequelize) {
-    options.tableName = 'Reviews';
+    options.tableName = 'SpotImages';
     const Op = Sequelize.Op;
     return queryInterface.bulkDelete(options, {
       name: { [Op.in]: ["App Academy", "Beachside Bungalow", "Mountain Cabin"] }

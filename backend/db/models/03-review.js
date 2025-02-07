@@ -7,20 +7,21 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       Review.belongsTo(models.User, { foreignKey: 'userId' });
       Review.belongsTo(models.Spot, { foreignKey: 'spotId' });
+      Review.hasMany(models.ReviewImage, { foreignKey: 'reviewId' })
     }
   }
 
   Review.init(
     {
-      spotId: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        references: { model: 'Spots', key: 'id' }
-      },
       userId: {
         type: DataTypes.INTEGER,
         allowNull: false,
         references: { model: 'Users', key: 'id' }
+      },
+      spotId: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        references: { model: 'Spots', key: 'id' }
       },
       review: {
         type: DataTypes.STRING,
@@ -30,6 +31,11 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.INTEGER,
         allowNull: false,
         validate: { min: 1, max: 5 }
+      },
+      reviewImage: {
+        type: DataTypes.STRING,
+        allowNull: true,
+        references: { model: 'ReviewImages', key: 'id'}
       }
     },
     {
