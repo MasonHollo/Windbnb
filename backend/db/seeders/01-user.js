@@ -3,7 +3,7 @@
 const { User } = require('../models');  
 const bcrypt = require("bcryptjs");
 
-console.log(User);
+
 let options = {};
 if (process.env.NODE_ENV === 'production') {
   options.schema = process.env.SCHEMA;  // define your schema in options object

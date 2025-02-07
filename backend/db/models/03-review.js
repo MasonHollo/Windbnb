@@ -32,11 +32,6 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
         validate: { min: 1, max: 5 }
       },
-      reviewImage: {
-        type: DataTypes.STRING,
-        allowNull: true,
-        references: { model: 'ReviewImages', key: 'id'}
-      }
     },
     {
       sequelize,
