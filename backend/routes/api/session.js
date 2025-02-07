@@ -30,6 +30,7 @@ const validateLogin = [
 
 // Log in
 router.post('/', validateLogin, async (req, res, next) => {
+  try{
       const { credential, password } = req.body;
   
       const user = await User.unscoped().findOne({
@@ -42,11 +43,11 @@ router.post('/', validateLogin, async (req, res, next) => {
       });
   
       if (!user || !bcrypt.compareSync(password, user.hashedPassword.toString())) {
-        const err = new Error('Login failed');
+        const err = new Error('Invalid credentials');
         err.status = 401;
         err.title = 'Login failed';
         err.errors = { credential: 'The provided credentials were invalid.' };
-        return next(err);
+        return next(err); 
       }
   
       const safeUser = {
@@ -62,20 +63,27 @@ router.post('/', validateLogin, async (req, res, next) => {
       return res.json({
         user: safeUser
       });
+    }catch (error) {
+      return res.status(500).json({ message: 'Something went wrong', error: error.message });
     }
-  );
+    });
 
 
 // Log out
 router.delete('/', (_req, res) => {
+  try{
     res.clearCookie('token');
     return res.json({ message: 'success' });
+  }catch (error) {
+    return res.status(500).json({ message: 'Something went wrong', error: error.message });
+  }
 }
 );
 
 
 // Restore session user
 router.get('/', (req, res) => {
+  try{
     const { user } = req;
     if (user) {
         const safeUser = {
@@ -89,6 +97,9 @@ router.get('/', (req, res) => {
             user: safeUser
         });
     } else return res.json({ user: null });
+  }catch (error) {
+    return res.status(500).json({ message: 'Something went wrong', error: error.message });
+  }
 }
 );
 

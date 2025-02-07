@@ -4,8 +4,8 @@ const express = require('express');
 const router = express.Router();
 const apiRouter = require('./api');
 
-
 router.use('/api', apiRouter);
+
 
 // Add a XSRF-TOKEN cookie
 router.get("/api/csrf/restore", (req, res) => {
@@ -16,5 +16,11 @@ router.get("/api/csrf/restore", (req, res) => {
   });
 });
 
+
+// const { Spot } = require('../db/models');
+// router.get("/api/spots", async (req, res) => {
+//   const spots = await Spot.findAll(); // Fetch all spots
+//   res.status(200).json(spots);
+// })
 
 module.exports = router;
