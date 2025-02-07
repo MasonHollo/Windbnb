@@ -16,12 +16,12 @@ module.exports = (sequelize, DataTypes) => {
       userId: {
         type: DataTypes.INTEGER,
         allowNull: false,
-        references: { model: 'User', key: 'id' }
+        references: { model: 'Users', key: 'id' }
       },
       spotId: {
         type: DataTypes.INTEGER,
         allowNull: false,
-        references: { model: 'Spot', key: 'id' }
+        references: { model: 'Spots', key: 'id' }
       },
       review: {
         type: DataTypes.STRING,
@@ -35,7 +35,7 @@ module.exports = (sequelize, DataTypes) => {
       reviewImage: {
         type: DataTypes.STRING,
         allowNull: true,
-        references: { model: 'ReviewImage', key: 'id'}
+        references: { model: 'ReviewImages', key: 'id'}
       }
     },
     {
