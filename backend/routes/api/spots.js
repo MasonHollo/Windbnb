@@ -3,7 +3,7 @@ const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
 const { requireAuth } = require('../../utils/auth');
 const { Review, Spot, SpotImage, User, ReviewImage } = require('../../db/models');
-const { Op } = require('sequelize');
+const { Sequelize, Op } = require('sequelize');
 
 const router = express.Router();
 
@@ -141,10 +141,11 @@ router.get('/', async (req, res) => {
           model: Review,
           attributes: [],
         }
-      ]
+      ],
+      group: ['Spot.id']
     }));
     
-    res.status(200).json({ Spots: spots,numOfReviews,avgStarRating });
+    res.status(200).json({ Spots: spots });
   } catch (error) {
     return res.status(500).json({ message: 'Something went wrong', error: error.message });
   }
