@@ -3,6 +3,7 @@ const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
 const { requireAuth } = require('../../utils/auth');
 const { Review, Spot, SpotImage, User, ReviewImage } = require('../../db/models');
+const { Op } = require('sequelize');
 
 const router = express.Router();
 
@@ -122,8 +123,28 @@ router.get('/:spotId', async (req, res) => {
 //GET ALL SPOTS
 router.get('/', async (req, res) => {
   try {
-    const spots = await Spot.findAll();
-    res.status(200).json({ Spots: spots });
+    const spots = await Spot.findAll(({
+      attributes: {
+        include: [
+          [
+            Sequelize.fn('COUNT', Sequelize.col('Reviews.id')),
+            'numOfReviews'
+          ],
+          [
+            Sequelize.fn('AVG', Sequelize.col('Reviews.stars')),
+            'avgStarRating'
+          ]
+        ]
+      },
+      include: [
+        {
+          model: Review,
+          attributes: [],
+        }
+      ]
+    }));
+    
+    res.status(200).json({ Spots: spots,numOfReviews,avgStarRating });
   } catch (error) {
     return res.status(500).json({ message: 'Something went wrong', error: error.message });
   }
@@ -196,7 +217,6 @@ router.get('/', async (req, res) => {
 
   try {
   const { minLat, maxLat, minLng, maxLng, minPrice, maxPrice, page, size } = req.query;
-  const { Op } = require('sequelize');
 
   page = parseInt(page);
   size = parseInt(size);
