@@ -296,7 +296,7 @@ router.put('/:spotId', requireAuth, validateSpot, async (req, res) => {
   } catch (e) {
     return res.status(500).json({
       message: "Something went wrong",
-      error: error.message
+      error: e.message
     });
   }
 });
