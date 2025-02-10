@@ -28,16 +28,16 @@ const validateSpot = [
     .withMessage('Longitude must be within -180 and 180'),
   check('name')
     .exists({ checkFalsy: true })
-    .isLength({ max: 50 })
-    .withMessage('Name must be less than 50 characters')
-    .withMessage('Name is required'),
+    .withMessage('Name is required')
+    .isLength({ max: 50 }) 
+    .withMessage('Name must be less than 50 characters'),
   check('description')
     .exists({ checkFalsy: true })
     .withMessage('Description is required'),
   check('price')
     .isFloat({ min: 0 })
     .withMessage('Price per day must be a positive number'),
-  handleValidationErrors
+    handleValidationErrors
 ];
 
 const validateReview = [
@@ -77,6 +77,41 @@ const validateBooking = [
   handleValidationErrors
 ]
 
+const validateQueryParams = [
+  check('page')
+    .optional()
+    .isInt({ min: 1 })
+    .withMessage('Page must be greater than or equal to 1'),
+  check('size')
+    .optional()
+    .isInt({ min: 1 })
+    .withMessage('Size must be greater than or equal to 1'),
+  check('maxLat')
+    .optional()
+    .isFloat({ min: -90, max: 90 })
+    .withMessage('Maximum latitude is invalid'),
+  check('minLat')
+    .optional()
+    .isFloat({ min: -90, max: 90 })
+    .withMessage('Minimum latitude is invalid'),
+  check('maxLng')
+    .optional()
+    .isFloat({ min: -180, max: 180 })
+    .withMessage('Maximum longitude is invalid'),
+  check('minLng')
+    .optional()
+    .isFloat({ min: -180, max: 180 })
+    .withMessage('Minimum longitude is invalid'),
+  check('minPrice')
+    .optional()
+    .isFloat({ min: 0 })
+    .withMessage('Minimum price must be greater than or equal to 0'),
+  check('maxPrice')
+    .optional()
+    .isFloat({ min: 0 })
+    .withMessage('Maximum price must be greater than or equal to 0'),
+  handleValidationErrors
+];
 //get spots owned by currnet user
 router.get('/current', requireAuth, async (req, res, next) => {
   try {
@@ -143,7 +178,7 @@ router.get('/:spotId', async (req, res, next) => {
       where: { spotId },
       raw: true
     });
-    return res.json({
+    return res.status(200).json({
       id: spot.id,
       ownerId: spot.ownerId,
       address: spot.address,
@@ -170,7 +205,7 @@ router.get('/:spotId', async (req, res, next) => {
 
 
 //GET ALL SPOTS & QUERY
-router.get('/', async (req, res, next) => {
+router.get('/', validateQueryParams, async (req, res, next) => {
   try {
     let { minLat, maxLat, minLng, maxLng, minPrice, maxPrice, page, size } = req.query;
 
@@ -228,10 +263,17 @@ router.get('/', async (req, res, next) => {
 
 
 //CREATE A SPOT
-router.post('/', requireAuth, validateSpot, async (req, res) => {
+router.post('/', requireAuth, validateSpot, async (req, res, next) => {
   try {
-    const { address, city, state, country, lat, lng, name, description, price } = req.body;
+    const { address, city, state, country, lat, lng, name, description } = req.body;
+    let { price } = req.body;
     const { user } = req;
+
+    price = parseFloat(price);
+
+    if (isNaN(price)) {
+      return res.status(400).json({ error: 'Price per day must be a positive number' });
+    }
 
     const newSpot = await Spot.create({
       ownerId: user.id,
@@ -286,12 +328,12 @@ router.delete('/:spotId', requireAuth, async (req, res, next) => {
 
 
 // Edit A Spot
-router.put('/:spotId', requireAuth, validateSpot, async (req, res, error) => {
+router.put('/:spotId', requireAuth, validateSpot, async (req, res, next) => {
   try {
     const { spotId } = req.params;
     const { user } = req;
-    const { address, city, state, country, lat, lng, name, description, price } = req.body;
-
+    const { address, city, state, country, lat, lng, name, description } = req.body;
+    let { price } = req.body;
 
     const spot = await Spot.findByPk(spotId);
 
@@ -307,6 +349,11 @@ router.put('/:spotId', requireAuth, validateSpot, async (req, res, error) => {
       });
     }
 
+    price = parseFloat(price);
+
+    if (isNaN(price)) {
+      return res.status(400).json({ error: 'Price per day must be a positive number' });
+    }
     await spot.update({
       address, city, state, country, lat, lng, name, description, price
     });
@@ -495,7 +542,7 @@ router.post('/:spotId/bookings', requireAuth, validateBooking, async (req, res, 
     }
 
     if (spot.ownerId === req.user.id) {
-      return res.status(401).json({ message: "Owners can't book their own spot" });
+      return res.status(403).json({ message: "Forbidden" });
     }
 
     const newStartDate = new Date(startDate);

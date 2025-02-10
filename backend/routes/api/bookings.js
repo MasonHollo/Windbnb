@@ -75,7 +75,7 @@ router.put('/:bookingId', requireAuth, async (req, res, next) => {
 
     await booking.update({ startDate, endDate });
 
-    return res.statusCode(200).json(booking);
+    return res.status(200).json(booking);
   } catch (error) {
     next(error);
   }
