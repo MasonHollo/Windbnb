@@ -66,10 +66,7 @@ router.delete('/spot-images/:imageId', requireAuth, async (req, res, next) => {
     });
 
   } catch (e) {
-    return res.status(500).json({
-      message: "Something went wrong",
-      error: error.message
-    });
+   next(error);
   }
 });
 
@@ -100,10 +97,7 @@ router.delete('/review-images/:imageId', requireAuth, async (req, res, next) => 
     });
 
   } catch (e) {
-    return res.status(500).json({
-      message: "Something went wrong",
-      error: error.message
-    });
+    next(error);
   }
 });
 

@@ -19,14 +19,14 @@ router.get('/current', requireAuth, async (req, res, next) => {
       }
     });
 
-    res.json({ Bookings: bookings });
+    res.status(200).json({ Bookings: bookings });
   } catch (error) {
-    return res.status(500).json({ message: 'Something went wrong', error: error.message });
+    next(error);
   }
 });
 
 //EDIT A BOOKING
-router.put('/:bookingId', requireAuth, async (req, res) => {
+router.put('/:bookingId', requireAuth, async (req, res, next) => {
   try {
     const { bookingId } = req.params;
     const { startDate, endDate } = req.body;
@@ -75,14 +75,14 @@ router.put('/:bookingId', requireAuth, async (req, res) => {
 
     await booking.update({ startDate, endDate });
 
-    return res.json(booking);
+    return res.statusCode(200).json(booking);
   } catch (error) {
-    return res.status(500).json({ message: 'Something went wrong', error: error.message });
+    next(error);
   }
 });
 
 //DELETE A BOOKING
-router.delete('/:bookingId', requireAuth, async (req, res) => {
+router.delete('/:bookingId', requireAuth, async (req, res, next) => {
   try {
     const { bookingId } = req.params;
 
@@ -105,7 +105,7 @@ router.delete('/:bookingId', requireAuth, async (req, res) => {
 
     return res.json({ message: "Successfully deleted" });
   } catch (error) {
-    return res.status(500).json({ message: 'Something went wrong', error: error.message });
+    next(error);
   }
 });
 
