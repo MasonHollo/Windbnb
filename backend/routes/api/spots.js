@@ -78,7 +78,7 @@ const validateBooking = [
 ]
 
 //get spots owned by currnet user
-router.get('/current', requireAuth, async (req, res) => {
+router.get('/current', requireAuth, async (req, res, next) => {
   try {
     const userId = req.user.id;
     const spots = await Spot.findAll({
@@ -90,7 +90,7 @@ router.get('/current', requireAuth, async (req, res) => {
             "avgRating",
           ],
           [
-            Sequelize.literal("'test url'"),
+            Sequelize.literal("'image url'"),
             "previewImage",
           ],
         ],
@@ -106,12 +106,12 @@ router.get('/current', requireAuth, async (req, res) => {
 
     return res.status(200).json({ Spots: spots });
   } catch (error) {
-    return res.status(500).json({ message: 'Something went wrong', error: error.message });
+    next(error)
   }
 });
 
 //GET DETAILS OF SPOT FROM SPOTID
-router.get('/:spotId', async (req, res) => {
+router.get('/:spotId', async (req, res, next) => {
   try {
     const { spotId } = req.params;
 
@@ -164,13 +164,13 @@ router.get('/:spotId', async (req, res) => {
     });
 
   } catch (error) {
-    return res.status(500).json({ message: 'Something went wrong', error: error.message });
+    next(error);
   }
 });
 
 
 //GET ALL SPOTS & QUERY
-router.get('/', async (req, res) => {
+router.get('/', async (req, res, next) => {
   try {
     let { minLat, maxLat, minLng, maxLng, minPrice, maxPrice, page, size } = req.query;
 
@@ -201,7 +201,7 @@ router.get('/', async (req, res) => {
             "avgRating",
           ],
           [
-            Sequelize.literal("'test url'"),
+            Sequelize.literal("'image url'"),
             "previewImage",
           ],
         ],
@@ -222,7 +222,7 @@ router.get('/', async (req, res) => {
 
     res.status(200).json({ Spots: spots, page, size });
   } catch (error) {
-    return res.status(500).json({ message: 'Something went wrong', error: error.message });
+    next(error);
   }
 });
 
@@ -248,12 +248,12 @@ router.post('/', requireAuth, validateSpot, async (req, res) => {
 
     return res.status(201).json(newSpot);
   } catch (error) {
-    return res.status(500).json({ message: 'Something went wrong', error: error.message });
+    next(error);
   }
 });
 
 //Delete a Spot
-router.delete('/:spotId', requireAuth, async (req, res) => {
+router.delete('/:spotId', requireAuth, async (req, res, next) => {
   try {
     const { spotId } = req.params;
     const { user } = req;
@@ -279,17 +279,14 @@ router.delete('/:spotId', requireAuth, async (req, res) => {
       message: "Successfully deleted"
     });
 
-  } catch (e) {
-    return res.status(500).json({
-      message: "Something went wrong",
-      error: error.message
-    });
+  } catch (error) {
+    next(error);
   }
 });
 
 
 // Edit A Spot
-router.put('/:spotId', requireAuth, validateSpot, async (req, res) => {
+router.put('/:spotId', requireAuth, validateSpot, async (req, res, error) => {
   try {
     const { spotId } = req.params;
     const { user } = req;
@@ -317,17 +314,14 @@ router.put('/:spotId', requireAuth, validateSpot, async (req, res) => {
 
     return res.status(200).json(spot);
 
-  } catch (e) {
-    return res.status(500).json({
-      message: "Something went wrong",
-      error: e.message
-    });
+  } catch (error) {
+    next(error);
   }
 });
 
 
 // Add Image to Spot
-router.post('/:spotId/images', requireAuth, async (req, res) => {
+router.post('/:spotId/images', requireAuth, async (req, res, next) => {
   try {
     const { spotId } = req.params;
     const { url, preview, userId } = req.body;
@@ -360,13 +354,13 @@ router.post('/:spotId/images', requireAuth, async (req, res) => {
       preview: newImage.preview,
     });
   } catch (error) {
-    return res.status(500).json({ message: 'Something went wrong', error: error.message });
+    next(error);
   }
 });
 
 
 //CREATE A REVIEW FOR A SPOT BASED ON SPOTID
-router.post('/:spotId/reviews', requireAuth, validateReview, async (req, res) => {
+router.post('/:spotId/reviews', requireAuth, validateReview, async (req, res, next) => {
   try {
     const { spotId } = req.params;
     const { review, stars } = req.body;
@@ -401,12 +395,12 @@ router.post('/:spotId/reviews', requireAuth, validateReview, async (req, res) =>
 
     return res.status(201).json(newReview);
   } catch (error) {
-    return res.status(500).json({ message: 'Something went wrong', error: error.message });
+      next(error);
   }
 });
 
 //GET ALL REVIEWS BY A SPOTS ID
-router.get('/:spotId/reviews', async (req, res) => {
+router.get('/:spotId/reviews', async (req, res, next) => {
   try {
     const { spotId } = req.params;
     const spot = await Spot.findByPk(spotId)
@@ -431,7 +425,7 @@ router.get('/:spotId/reviews', async (req, res) => {
     });
     return res.status(200).json({ Reviews: reviews });
   } catch (error) {
-    return res.status(500).json({ message: 'Something went wrong', error: error.message });
+    next(error);
   }
 });
 
@@ -483,8 +477,8 @@ router.get('/:spotId/bookings', requireAuth, async (req, res, next) => {
     return res.status(200).json({ Bookings: bookings });
 
 
-  } catch (err) {
-    next(err);
+  } catch (error) {
+    next(error);
   }
 });
 
