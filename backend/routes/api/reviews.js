@@ -84,7 +84,7 @@ router.post("/:reviewId/images", requireAuth, async (req, res, next) => {
     reviewId
   });
 
-  return res.status(200).json({
+  return res.status(201).json({
     
     id: newImage.id,
     url: newImage.url,
@@ -138,9 +138,9 @@ router.put('/:reviewId', requireAuth, validateReview, async (req, res, next) => 
 
     const reviews = await Review.findByPk(reviewId);
 
-    if (!review) {
+    if (!reviews) {
       return res.status(404).json({
-        message: "review couldn't be found"
+        message: "Review couldn't be found"
       });
     }
 
@@ -156,7 +156,7 @@ router.put('/:reviewId', requireAuth, validateReview, async (req, res, next) => 
 
     return res.status(200).json(reviews);
 
-  } catch (e) {
+  } catch (error) {
     next(error)
   }
 });
