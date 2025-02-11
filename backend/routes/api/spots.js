@@ -395,7 +395,7 @@ router.post('/:spotId/images', requireAuth, async (req, res, next) => {
       userId
     });
 
-    return res.status(200).json({
+    return res.status(201).json({
       id: newImage.id,
       url: newImage.url,
       preview: newImage.preview,
@@ -428,7 +428,7 @@ router.post('/:spotId/reviews', requireAuth, validateReview, async (req, res, ne
     });
 
     if (reviews) {
-      return res.status(400).json({
+      return res.status(500).json({
         message: "User already has a review for this spot"
       });
     }
@@ -454,7 +454,7 @@ router.get('/:spotId/reviews', async (req, res, next) => {
 
     if (!spot) {
       return res.status(404).json({
-        message: "Spot not found."
+        message: "Spot couldn't be found"
       });
     }
     const reviews = await Review.findAll({
