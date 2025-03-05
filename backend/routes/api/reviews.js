@@ -19,7 +19,7 @@ handleValidationErrors
 ]
 
 //get all reviews of current user.
-router.get('/current', requireAuth, async (req, res) => {
+router.get('/current', requireAuth, async (req, res, next) => {
   try{
   const reviews = await Review.findAll({
     where: { userId: req.user.id },
@@ -42,14 +42,14 @@ router.get('/current', requireAuth, async (req, res) => {
     ],
     attributes: ['id', 'userId', 'spotId', 'review', 'stars', 'createdAt', 'updatedAt'],
   });
-  res.json({ Reviews: reviews });
+  res.status(200).json({ Reviews: reviews });
 }catch (error) {
-  return res.status(500).json({ message: 'Something went wrong', error: error.message });
+  next(error)
 }
 });
 
 //add a image to a review from review Id 
-router.post("/:reviewId/images", requireAuth, async (req, res) => {
+router.post("/:reviewId/images", requireAuth, async (req, res, next) => {
   try{
     const { reviewId } = req.params;
     const { url } = req.body;
@@ -84,19 +84,19 @@ router.post("/:reviewId/images", requireAuth, async (req, res) => {
     reviewId
   });
 
-  return res.status(200).json({
+  return res.status(201).json({
     
     id: newImage.id,
     url: newImage.url,
 
   });
 }catch (error) {
-  return res.status(500).json({ message: 'Something went wrong', error: error.message });
+ next(error);
 }
 });
 
 //Delete a review
-router.delete('/:reviewId', requireAuth, async (req, res) => {
+router.delete('/:reviewId', requireAuth, async (req, res, next) => {
   try {
     const { reviewId } = req.params;
     const { user } = req;
@@ -106,7 +106,7 @@ router.delete('/:reviewId', requireAuth, async (req, res) => {
 
     if (!review) {
       return res.status(404).json({
-        message: "review couldn't be found"
+        message: "Review couldn't be found"
       });
     }
 
@@ -123,16 +123,13 @@ router.delete('/:reviewId', requireAuth, async (req, res) => {
       message: "Successfully deleted"
     });
 
-  } catch (e) {
-    return res.status(500).json({
-      message: "Something went wrong",
-      error: error.message
-    });
+  } catch (error) {
+    next(error)
   }
 });
 
 // Edit A Review 
-router.put('/:reviewId', requireAuth, validateReview, async (req, res) => {
+router.put('/:reviewId', requireAuth, validateReview, async (req, res, next) => {
   try {
     const { reviewId } = req.params;
     const { user } = req;
@@ -141,9 +138,9 @@ router.put('/:reviewId', requireAuth, validateReview, async (req, res) => {
 
     const reviews = await Review.findByPk(reviewId);
 
-    if (!review) {
+    if (!reviews) {
       return res.status(404).json({
-        message: "review couldn't be found"
+        message: "Review couldn't be found"
       });
     }
 
@@ -159,11 +156,8 @@ router.put('/:reviewId', requireAuth, validateReview, async (req, res) => {
 
     return res.status(200).json(reviews);
 
-  } catch (e) {
-    return res.status(500).json({
-      message: "Something went wrong",
-      error: error.message
-    });
+  } catch (error) {
+    next(error)
   }
 });
 

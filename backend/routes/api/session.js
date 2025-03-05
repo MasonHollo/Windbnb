@@ -21,10 +21,10 @@ const validateLogin = [
     check('credential')
       .exists({ checkFalsy: true })
       .notEmpty()
-      .withMessage('Please provide a valid email or username.'),
+      .withMessage('Email or username is required'),
     check('password')
       .exists({ checkFalsy: true })
-      .withMessage('Please provide a password.'),
+      .withMessage('Password is required'),
     handleValidationErrors
   ];
 
@@ -60,22 +60,22 @@ router.post('/', validateLogin, async (req, res, next) => {
   
       await setTokenCookie(res, safeUser);
   
-      return res.json({
+      return res.status(200).json({
         user: safeUser
       });
     }catch (error) {
-      return res.status(500).json({ message: 'Something went wrong', error: error.message });
+      next(error);
     }
     });
 
 
 // Log out
-router.delete('/', (_req, res) => {
+router.delete('/', (_req, res, next) => {
   try{
     res.clearCookie('token');
     return res.json({ message: 'success' });
   }catch (error) {
-    return res.status(500).json({ message: 'Something went wrong', error: error.message });
+    next(error);
   }
 }
 );
@@ -98,7 +98,7 @@ router.get('/', (req, res) => {
         });
     } else return res.json({ user: null });
   }catch (error) {
-    return res.status(500).json({ message: 'Something went wrong', error: error.message });
+    next(error);
   }
 }
 );
