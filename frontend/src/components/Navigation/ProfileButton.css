@@ -1,3 +1,14 @@
 .hidden{
     visibility: hidden;
 }
+.profile-dropdown{
+    /* background-color: aqua; */
+    margin-right: 570px;
+    border-radius: 2px;
+    border-style: solid;
+}
+#NavButton{
+    display: flex;
+    justify-content: center;
+
+}
