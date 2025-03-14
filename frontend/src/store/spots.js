@@ -15,7 +15,7 @@ const initialState = {
 const spotReducer = (state = initialState, action) => {
     let newState;
     switch (action.type) {
-        case "GET_ALL_SPOTS":
+        case "GET_ALL_SPOTS":{
             const spots = action.payload;
             newState = { ...state };
             newState.allIds = [];
@@ -27,7 +27,7 @@ const spotReducer = (state = initialState, action) => {
             }
 
             return newState;
-
+        }
         default:
             return state;
     }
