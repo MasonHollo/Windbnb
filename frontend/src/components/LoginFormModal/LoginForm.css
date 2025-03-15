@@ -1,10 +1,21 @@
-#modal-content{
-    background-color: blueviolet;
-    border-radius: 10px;
+#loginheader{
+    background-color: thistle;
     display: flex;
-    flex-direction: column;
-    justify-content:center;
     align-items: center;
-    margin-inline: 200px;
-    
+    justify-content: center;
+}
+#usernameinput{
+    background-color: yellow;
+    display: flex;
+    align-items: center;
+}
+#passwordinput{
+    background-color: yellowgreen;
+    display: flex;
+    align-items: center;
+}
+#loginbutton{
+    background-color: blue;
+    display: flex;
+    align-items: center;
 }

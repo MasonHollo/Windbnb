@@ -7,8 +7,25 @@
     border-radius: 2px;
     border-style: solid;
 }
-#NavButton{
+#NavButton {
     display: flex;
-    justify-content: center;
+    align-items: center;
+    justify-content: space-between;
+    width: 60px; 
+    height: 30px;
+    padding: 5px 10px;
+    border: 2px solid black;
+    border-radius: 999px; 
+    background-color: white; 
+    cursor: pointer;
+  }
+  
 
-}
+  #NavButton svg {
+    font-size: 18px; 
+  }
+  
+  #NavButton:hover {
+    background-color: #f0f0f0;
+  }
+  

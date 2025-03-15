@@ -1,11 +1,36 @@
-#navArea{
-    /* background-color: tomato; */
-    display:block;
-    flex-wrap: wrap;   
-    justify-content:center;
-    align-items: center;
+.navbar {
+    display: flex;
+    justify-content:space-between;
+    align-items:center ;
+    border-bottom: 1px solid #ddd;
+   /* background-color: yellowgreen; */
+  }
+  .profile-dropdown {
+    position: absolute;  
+    left: 77%;         
+    top: 14%;          
+    border: 1px solid black;
+    background-color: white;
 }
-#NavButton{
-    justify-content: flex-end;
-    align-items: flex-end;
+
+#homelink {
+  display: flex;
+  align-items: center;
 }
+
+#imglink {
+  width: 40px; 
+  height: auto;
+  margin-right: 8px;
+}
+
+#homelink a {
+  display: flex;
+  align-items: center; 
+  text-decoration: none; 
+}
+
+
+  
+  
+  
