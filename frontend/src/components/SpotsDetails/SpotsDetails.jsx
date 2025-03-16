@@ -18,13 +18,13 @@ const SpotDetail = () => {
     if (!spot) {
         return <p>Loading spot details...</p>;
     }
-    const previewImage = spot.SpotImages?.find(img => img.preview)?.url
+
 
     return (
         <div>
             <h3>{spot.name}</h3>
             <p>Location: {spot.city}, {spot.state}, {spot.country}</p>
-            <img src={previewImage} alt={spot.name} />
+            <img src={spot.previewImage} alt={spot.name} />
 
             <p>Hosted by {spot.ownerId}</p>
             <p>{spot.description}</p>
