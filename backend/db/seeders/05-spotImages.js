@@ -17,7 +17,7 @@ module.exports = {
         userId:1
     },
     {
-        url:  "https://cdn.vox-cdn.com/thumbor/kFJ_36eTxBTnLPRysSUWUmTCTDQ=/0x0:1000x666/1370x1028/filters:focal(420x253:580x413):format(webp):no_upscale()/cdn.vox-cdn.com/uploads/chorus_image/image/62569177/Featured_Listing__The_Late_Leonard_Miller_s_23_Star_Island_Lists_for__49_Million.0.0.jpeg",
+        url:  "https://cf.bstatic.com/xdata/images/hotel/max1280x900/517550012.jpg?k=0ba780f463b4132594597bbb02a4626b8136bac80afc71436ded925a58b0ecfe&o=&hp=1",
         preview: true,
         spotId: 2,
         userId: 2
