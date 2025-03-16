@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getAllSpots } from "../../store/spots";
 import "./SpotsList.css";
 
-import spotcards from "../subcomponents/spotcards";
+import SpotCards from "../subcomponents/spotcards";
 
 const SpotsList = () => {
     const dispatch = useDispatch();
@@ -25,7 +25,7 @@ const SpotsList = () => {
                 {spotsExist ? (
                     spots.allIds.map((spotId) => {
                         const spot = spots.byId[spotId];
-                        return spotcards(spot)
+                        return <SpotCards key={spotId} spot={spot} />;
                     })
                 ) : (
                     <p>No spots available</p>
