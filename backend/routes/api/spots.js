@@ -125,7 +125,13 @@ router.get('/current', requireAuth, async (req, res, next) => {
             "avgRating",
           ],
           [
-            Sequelize.literal("'image url'"),
+            Sequelize.literal(`(
+              SELECT "url" 
+              FROM "SpotImages" 
+              WHERE "SpotImages"."spotId" = "Spot"."id" 
+              AND "SpotImages"."preview" = true 
+              LIMIT 1
+            )`),
             "previewImage",
           ],
         ],
@@ -236,7 +242,13 @@ router.get('/', validateQueryParams, async (req, res, next) => {
             "avgRating",
           ],
           [
-            Sequelize.literal("'image url'"),
+            Sequelize.literal(`(
+              SELECT "url" 
+              FROM "SpotImages" 
+              WHERE "SpotImages"."spotId" = "Spot"."id" 
+              AND "SpotImages"."preview" = true 
+              LIMIT 1
+            )`),
             "previewImage",
           ],
         ],
