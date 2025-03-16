@@ -12,13 +12,13 @@ module.exports = {
     await Spot.bulkCreate([
       {
         ownerId: 1,
-        address: "123 Disney Lane",
+        address: "123 Baker Beach",
         city: "San Francisco",
         state: "California",
         country: "United States of America",
         lat: 37.7645358,
         lng: -122.4730327,
-        name: "App Academy",
+        name: "Baker Beach Home",
         description: "Place where web developers are created",
         price: 123
       },
@@ -44,6 +44,30 @@ module.exports = {
         lng: -104.9903,
         name: "Mountain Cabin",
         description: "A cozy cabin in the mountains",
+        price: 150
+      },
+      {
+        ownerId: 2,
+        address: "789 Mountain Road",
+        city: "Paradise Vally",
+        state: "Arizona",
+        country: "United States of America",
+        lat: 39.7392,
+        lng: -104.9903,
+        name: "Desert Paradise",
+        description: "A desert home in the mountiants with a view of the city",
+        price: 150
+      },
+      {
+        ownerId: 1,
+        address: "789 Mountain Road",
+        city: "Milton",
+        state: "Georgia",
+        country: "United States of America",
+        lat: 39.7392,
+        lng: -104.9903,
+        name: "Country Farmhouse",
+        description: "A southern farmhouse in the rural countryside",
         price: 150
       }
     ], { validate: true });
