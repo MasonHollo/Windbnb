@@ -10,7 +10,7 @@ const SpotDetail = () => {
         fetch(`/api/spots/${id}`)
             .then((res) => res.json())
             .then((data) => { 
-                console.log("Fetched spot data:", data); // Debugging
+                console.log("Fetched spot data:", data);
                 setSpot(data);
             });
     }, [id]);
@@ -24,7 +24,7 @@ const SpotDetail = () => {
         <div>
             <h3>{spot.name}</h3>
             <p>Location: {spot.city}, {spot.state}, {spot.country}</p>
-            <img src={spot.previewImage} alt={spot.name} />
+            {/* <img src={spot.previewImage} alt={spot.name} /> */}
 
             <p>Hosted by {spot.ownerId}</p>
             <p>{spot.description}</p>
