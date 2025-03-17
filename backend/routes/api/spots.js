@@ -245,7 +245,21 @@ router.get('/', validateQueryParams, async (req, res, next) => {
           [
             Sequelize.fn("AVG", Sequelize.col("Reviews.stars")),
             "avgRating",
-          ]
+          ],
+          [
+            Sequelize.fn("MAX", Sequelize.col("SpotImages.id")), 
+            "previewImageId",
+          ],
+          [
+            Sequelize.literal(`(
+              SELECT "url" 
+              FROM "SpotImages" 
+              WHERE "SpotImages"."spotId" = "Spot"."id" 
+              AND "SpotImages"."preview" = true 
+              LIMIT 1
+            )`),
+            "previewImageUrl",
+          ],
         ],
       },
       include: [
@@ -256,12 +270,12 @@ router.get('/', validateQueryParams, async (req, res, next) => {
         },
         {
           model: SpotImage,
-          attributes: ['url', 'preview'],
+          attributes: ['id', 'url', 'preview'],
           where: { preview: true },  
           required: false,  
         },
       ],
-      group: ["Spot.id"],
+      group: ["Spot.id", "SpotImages.id"],
       limit: size,
       offset: (page - 1) * size,
       subQuery: false
