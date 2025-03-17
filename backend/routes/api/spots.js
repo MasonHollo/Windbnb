@@ -250,10 +250,6 @@ router.get('/', validateQueryParams, async (req, res, next) => {
             Sequelize.fn("MAX", Sequelize.col("SpotImages.url")),
             "previewImage",
           ],
-          [
-            Sequelize.fn("MAX", Sequelize.col("SpotImages.id")),
-            "previewImageId",
-          ]
         ]
       },
       include: [
@@ -264,12 +260,12 @@ router.get('/', validateQueryParams, async (req, res, next) => {
         },
         {
           model: SpotImage,
-          attributes: ["url", "preview"],
+          attributes: ["id", "url"],
           where: { preview: true }, 
           required: false, 
         },
       ],
-      group: ["Spot.id"],
+      group: ["Spot.id", "SpotImages.id"],
       limit: size,
       offset: (page - 1) * size,
       subQuery: false,
