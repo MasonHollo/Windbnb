@@ -8,7 +8,7 @@ function SpotCards({ spot }){
             <img id='spotImage' src={spot.previewImage} alt={spot.name} />
             <p>{spot.city}, {spot.state}, ⭐{spot.avgRating}</p>
             <p>${spot.price} per night</p>
-
+          
         </Link>
         </div>
     )
