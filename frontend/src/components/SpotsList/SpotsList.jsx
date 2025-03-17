@@ -2,8 +2,8 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllSpots } from "../../store/spots";
 import "./SpotsList.css";
+import { Link } from "react-router-dom"
 
-import spotcards from "../subcomponents/spotcards";
 
 const SpotsList = () => {
     const dispatch = useDispatch();
