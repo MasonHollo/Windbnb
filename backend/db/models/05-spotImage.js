@@ -34,6 +34,7 @@ module.exports = (sequelize, DataTypes) => {
     {
       sequelize,
       modelName: 'SpotImage',
+      tableName: 'SpotImages', 
     }
   );
   return SpotImage;
