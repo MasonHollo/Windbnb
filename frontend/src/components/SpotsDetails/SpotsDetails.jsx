@@ -4,15 +4,12 @@ import "./SpotsDetails.css";
 
 const SpotDetail = () => {
     const { id } = useParams();
-    const [spot, setSpot] = useState(null);
+    const [spot, setSpot] = useState();
 
     useEffect(() => {
         fetch(`/api/spots/${id}`)
             .then((res) => res.json())
-            .then((data) => { 
-                console.log("Fetched spot data:", data); // Debugging
-                setSpot(data);
-            });
+            .then((data) => { setSpot(data) });
     }, [id]);
 
     if (!spot) {
@@ -24,6 +21,7 @@ const SpotDetail = () => {
             <h3>{spot.name}</h3>
             <p>Location: {spot.city}, {spot.state}, {spot.country}</p>
             <img src={spot.previewImage} alt={spot.name} />
+            <p>{spot.city}, {spot.state}</p>
             <p>Hosted by {spot.ownerId}</p>
             <p>{spot.description}</p>
             <p>${spot.price} per night</p>
