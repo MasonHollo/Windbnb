@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom"
 
-function spotcards(spot){
+function Spotcards(spot){
     return (
         <div>
         <Link to={`/spots/${spot.id}`} key={spot.id} className="spotItem">
@@ -14,4 +14,4 @@ function spotcards(spot){
     )
 }
 
-export default spotcards
+export default Spotcards
