@@ -12,7 +12,7 @@ const SpotsList = () => {
     useEffect(() => {
         fetch("/api/spots")
             .then((res) => res.json())
-            .then((data) => { dispatch(getAllSpots(data.Spots)) })
+            .then((data) => { dispatch(getAllSpots(data.spots)) })
     }, [dispatch]);
 
 
