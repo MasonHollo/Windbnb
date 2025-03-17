@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom"
 
-function Spotcards(spot){
+function spotcards(spot){
     return (
         <div>
         <Link to={`/spots/${spot.id}`} key={spot.id} className="spotItem">
@@ -8,10 +8,10 @@ function Spotcards(spot){
             <img id='spotImage' src={spot.previewImage} alt={spot.name} />
             <p>{spot.city}, {spot.state}, ⭐{spot.avgRating}</p>
             <p>${spot.price} per night</p>
-          
+
         </Link>
         </div>
     )
 }
 
-export default Spotcards
+export default spotcards
