@@ -25,11 +25,7 @@ const SpotsList = () => {
                 {spotsExist ? (
                     spots.allIds.map((spotId) => {
                         const spot = spots.byId[spotId];
-                        return (
-                            <div key={spot.id}> 
-                               < Spotcards spot={spot} />
-                            </div>
-                        );
+                        return <Spotcards key={spot.id} spot={spot} />;
                     })
                 ) : (
                     <p>No spots available</p>
