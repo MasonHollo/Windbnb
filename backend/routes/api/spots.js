@@ -170,8 +170,6 @@ router.get('/:spotId', async (req, res, next) => {
       ]
     });
 
-    console.log('Spot:', spot);
-
     if (!spot) {
       return res.status(404).json({
         message: "Spot couldn't be found"

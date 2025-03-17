@@ -16,18 +16,15 @@ const spotReducer = (state = initialState, action) => {
     switch (action.type) {
         case "GET_ALL_SPOTS": {
             const spots = action.payload;
-
-            console.log("Spots received:", spots);
-
-
             const newState = {
                 ...state,
                 allIds: spots.filter(spot => spot.id).map(spot => spot.id),  
                 byId: spots.reduce((acc, spot) => {
                     if (spot.id) {
-                        acc[spot.id] = spot;
-                    } else {
-                        console.warn("Spot missing id", spot);
+                        acc[spot.id] = {
+                            ...spot,
+                            spotImages: spot.SpotImages || [], // Ensure SpotImages are included
+                        };
                     }
                     return acc;
                 }, {}), 

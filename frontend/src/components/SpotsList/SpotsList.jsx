@@ -13,16 +13,10 @@ const SpotsList = () => {
         fetch("/api/spots")
         .then((res) => res.json())
         .then((data) => {
-            console.log("Data received:", data);  // Check what the response looks like
             if (data.Spots) {
                 dispatch(getAllSpots(data.Spots));
-            } else {
-                console.error("No spots data found");
             }
         })
-        .catch((error) => {
-            console.error("Error fetching spots:", error);
-        });
 }, [dispatch]);
 
     const spotsExist = spots.allIds && spots.allIds.length > 0;

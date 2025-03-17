@@ -20,7 +20,7 @@ const SpotDetail = () => {
         <div>
             <h3>{spot.name}</h3>
             <p>Location: {spot.city}, {spot.state}, {spot.country}</p>
-            <img src={spot.previewImage} alt={spot.name} />
+            <img id="detailsImages" src={spot.previewImage} alt={spot.name} />
             <p>{spot.city}, {spot.state}</p>
             <p>Hosted by {spot.ownerId}</p>
             <p>{spot.description}</p>
