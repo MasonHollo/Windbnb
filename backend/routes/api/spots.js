@@ -252,7 +252,7 @@ router.get('/', validateQueryParams, async (req, res, next) => {
               FROM "SpotImages" 
               WHERE "SpotImages"."spotId" = "Spot"."id" 
               AND "SpotImages"."preview" = true 
-              LIMIT 1
+              LIMIT 5
             )`),
             "previewImage",
           ],
