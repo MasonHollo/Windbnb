@@ -247,10 +247,6 @@ router.get('/', validateQueryParams, async (req, res, next) => {
             "avgRating",
           ],
           [
-            Sequelize.fn("MAX", Sequelize.col("SpotImages.id")), 
-            "previewImageId",
-          ],
-          [
             Sequelize.literal(`(
               SELECT "url" 
               FROM "SpotImages" 
@@ -258,7 +254,7 @@ router.get('/', validateQueryParams, async (req, res, next) => {
               AND "SpotImages"."preview" = true 
               LIMIT 1
             )`),
-            "previewImageUrl",
+            "previewImage",
           ],
         ],
       },
@@ -266,31 +262,17 @@ router.get('/', validateQueryParams, async (req, res, next) => {
         {
           model: Review,
           attributes: [],
-          required: false
-        },
-        {
-          model: SpotImage,
-          attributes: ['id', 'url', 'preview'],
-          where: { preview: true },  
-          required: false,  
+          required: false,
         },
       ],
-      group: ["Spot.id", "SpotImages.id"],
+      group: ["Spot.id"],
       limit: size,
       offset: (page - 1) * size,
-      subQuery: false
+      subQuery: false,
     });
-
-    const result = spots.map(spot => {
-      const previewImage = spot.SpotImages.length > 0 ? spot.SpotImages[0].url : null;
-      return {
-        ...spot.toJSON(),
-        previewImage, 
-      };
-    });
-
-
-    res.status(200).json({ Spots: result, page, size });
+    
+    res.status(200).json({ Spots: spots, page, size });
+    
   } catch (error) {
     next(error);
   }
