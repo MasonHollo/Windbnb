@@ -170,6 +170,8 @@ router.get('/:spotId', async (req, res, next) => {
       ]
     });
 
+    console.log('Spot:', spot);
+
     if (!spot) {
       return res.status(404).json({
         message: "Spot couldn't be found"
@@ -185,8 +187,7 @@ router.get('/:spotId', async (req, res, next) => {
       raw: true
     });
 
-    const spotImages = spot.SpotImages.filter(image => image.preview);
-
+    const previewImage = spot.SpotImages.length > 0 ? spot.SpotImages.find(image => image.preview)?.url : null;
     return res.status(200).json({
       id: spot.id,
       ownerId: spot.ownerId,
@@ -203,7 +204,8 @@ router.get('/:spotId', async (req, res, next) => {
       updatedAt: spot.updatedAt,
       numReviews: reviewStats.numReviews,
       avgStarRating: reviewStats.avgStarRating || 0, 
-      SpotImages: spotImages.length > 0 ? spotImages : [],
+      SpotImages: spot.SpotImages,
+      previewImage,
       Owner: spot.Owner,
     });
 
@@ -243,17 +245,7 @@ router.get('/', validateQueryParams, async (req, res, next) => {
           [
             Sequelize.fn("AVG", Sequelize.col("Reviews.stars")),
             "avgRating",
-          ],
-          [
-            Sequelize.literal(`(
-              SELECT "url" 
-              FROM "SpotImages" 
-              WHERE "SpotImages"."spotId" = "Spot"."id" 
-              AND "SpotImages"."preview" = true 
-              LIMIT 1
-            )`),
-            "previewImage",
-          ],
+          ]
         ],
       },
       include: [
@@ -262,6 +254,12 @@ router.get('/', validateQueryParams, async (req, res, next) => {
           attributes: [],
           required: false
         },
+        {
+          model: SpotImage,
+          attributes: ['url', 'preview'],
+          where: { preview: true },  
+          required: false,  
+        },
       ],
       group: ["Spot.id"],
       limit: size,
@@ -269,8 +267,16 @@ router.get('/', validateQueryParams, async (req, res, next) => {
       subQuery: false
     });
 
+    const result = spots.map(spot => {
+      const previewImage = spot.SpotImages.length > 0 ? spot.SpotImages[0].url : null;
+      return {
+        ...spot.toJSON(),
+        previewImage, 
+      };
+    });
 
-    res.status(200).json({ Spots: spots, page, size });
+
+    res.status(200).json({ Spots: result, page, size });
   } catch (error) {
     next(error);
   }
