@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllSpots } from "../../store/spots";
-import SpotCards from "../subcomponents/spotcards";
+import { Link } from "react-router-dom";
 import "./SpotsList.css";
 
 
@@ -20,12 +20,19 @@ const SpotsList = () => {
 
     return (
         <div>
-           
+
             <div className="spotList">
             {spotsExist ? (
                     spots.allIds.map((spotId) => {
-                        const spot = spots.byId[spotId];  
-                        return <SpotCards key={spotId} spot={spot} />;  
+                        const spot = spots.byId[spotId];
+                        return (
+                            <Link to={`/spots/${spot.id}`} key={spot.id} className="spotItem">
+                                <h3>{spot.name}</h3>
+                                <img id='spotImage' src={spot.previewImage} alt={spot.name} />
+                                <p>{spot.city}, {spot.state}, ⭐{spot.avgRating}</p>
+                                <p>${spot.price} per night</p>
+                            </Link>
+                        );
                     })
                 ) : (
                     <p>No spots available</p>
