@@ -23,7 +23,7 @@ const spotReducer = (state = initialState, action) => {
                     if (spot.id) {
                         acc[spot.id] = {
                             ...spot,
-                            spotImages: spot.SpotImages || [], // Ensure SpotImages are included
+                            spotImages: spot.SpotImages || [], 
                         };
                     }
                     return acc;

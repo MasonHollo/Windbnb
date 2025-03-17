@@ -20,7 +20,11 @@ const SpotDetail = () => {
         <div>
             <h3>{spot.name}</h3>
             <p>Location: {spot.city}, {spot.state}, {spot.country}</p>
-            <img id="detailsImages" src={spot.previewImage} alt={spot.name} />
+            <div className="detailsImages">
+                {spot.SpotImages.map((image) => (
+                    <img key={image.id} src={image.url} className="spotImages" />
+                ))}
+            </div>
             <p>{spot.city}, {spot.state}</p>
             <p>Hosted by {spot.ownerId}</p>
             <p>{spot.description}</p>

@@ -15,44 +15,114 @@ module.exports = {
         preview: true,
         spotId: 1,
         userId: 1
-      }, {
-        url: "https://robbreport.com/wp-content/uploads/2022/05/Stone-Home-6.jpg",
+      },
+      {
+        url: "https://robbreport.com/wp-content/uploads/2022/05/Stone-Home-2.jpg?resize=681,383",
         preview: true,
         spotId: 1,
         userId: 1
-      }, {
-        url: "https://robbreport.com/wp-content/uploads/2022/05/Stone-Home-6.jpg",
+      },
+      {
+        url: "https://img.sfist.com/2022/05/1-25th-avenue-garden.jpg",
         preview: true,
         spotId: 1,
         userId: 1
-      }, {
-        url: "https://robbreport.com/wp-content/uploads/2022/05/Stone-Home-6.jpg",
+      },
+      {
+        url: "https://img.sfist.com/2022/05/1-25th-avenue-living.jpg",
         preview: true,
         spotId: 1,
         userId: 1
-      }, {
-        url: "https://robbreport.com/wp-content/uploads/2022/05/Stone-Home-6.jpg",
+      },
+      {
+        url: "https://img.sfist.com/2022/05/1-25th-avenue-widow.jpg",
         preview: true,
         spotId: 1,
         userId: 1
       },
       //Spot 2
       {
-        url: "https://cf.bstatic.com/xdata/images/hotel/max1280x900/517550012.jpg?k=0ba780f463b4132594597bbb02a4626b8136bac80afc71436ded925a58b0ecfe&o=&hp=1",
+        url: "https://cdn-dknnf.nitrocdn.com/UULmjgivAAitezmwWhUMIrpfTexQjeUF/assets/images/optimized/rev-3667796/www.littlepalmisland.com/wp-content/uploads/2020/08/island-grand-living-room-horz.jpg",
+        preview: true,
+        spotId: 2,
+        userId: 2
+      },
+      {
+        url: "https://cdn-dknnf.nitrocdn.com/UULmjgivAAitezmwWhUMIrpfTexQjeUF/assets/images/optimized/rev-3667796/www.littlepalmisland.com/wp-content/uploads/2020/09/island-grand-bedroom-horz.jpg",
+        preview: true,
+        spotId: 2,
+        userId: 2
+      },
+      {
+        url: "https://cdn-dknnf.nitrocdn.com/UULmjgivAAitezmwWhUMIrpfTexQjeUF/assets/images/optimized/rev-3667796/www.littlepalmisland.com/wp-content/uploads/2020/09/suite-firepit-horz.jpg",
+        preview: true,
+        spotId: 2,
+        userId: 2
+      },
+      {
+        url: "https://cdn-dknnf.nitrocdn.com/UULmjgivAAitezmwWhUMIrpfTexQjeUF/assets/images/optimized/rev-3667796/www.littlepalmisland.com/wp-content/uploads/2024/06/balcony-horz.jpg",
+        preview: true,
+        spotId: 2,
+        userId: 2
+      },
+      {
+        url: "https://cdn-dknnf.nitrocdn.com/UULmjgivAAitezmwWhUMIrpfTexQjeUF/assets/images/optimized/rev-3667796/www.littlepalmisland.com/wp-content/uploads/2024/06/bathroom-2-horz.jpg",
         preview: true,
         spotId: 2,
         userId: 2
       },
       //SPOT 3
       {
-        url: "https://yocolorado.com/cdn/shop/articles/lucas-ludwig-VlWKGkYPo_U-unsplash_Cropped_6ec2c6ff-dfb1-4891-95d5-87636153ddaf.jpg?v=1632447355&width=1400",
+        url: "https://a0.muscache.com/im/pictures/hosting/Hosting-U3RheVN1cHBseUxpc3Rpbmc6MzgyMTU1MTQ%3D/original/3c19cf2f-1445-4e50-8296-52d0249a1762.jpeg?im_w=1200",
+        preview: true,
+        spotId: 3,
+        userId: 3
+      },
+      {
+        url: "https://a0.muscache.com/im/pictures/hosting/Hosting-U3RheVN1cHBseUxpc3Rpbmc6MzgyMTU1MTQ%3D/original/9445f170-7cd6-42cd-8589-0fc0586fcd81.jpeg?im_w=1200",
+        preview: true,
+        spotId: 3,
+        userId: 3
+      },
+      {
+        url: "https://a0.muscache.com/im/pictures/hosting/Hosting-U3RheVN1cHBseUxpc3Rpbmc6MzgyMTU1MTQ%3D/original/324adae6-d114-41b4-906b-045135a54a18.jpeg?im_w=1200",
+        preview: true,
+        spotId: 3,
+        userId: 3
+      },
+      {
+        url: "https://a0.muscache.com/im/pictures/hosting/Hosting-U3RheVN1cHBseUxpc3Rpbmc6MzgyMTU1MTQ%3D/original/508daa8d-74d2-43f6-ad9c-52a377c36e4a.jpeg?im_w=1200",
+        preview: true,
+        spotId: 3,
+        userId: 3
+      },
+      {
+        url: "https://a0.muscache.com/im/pictures/prohost-api/Hosting-38215514/original/caf27ec7-567d-4721-bcd0-507c9fbde007.jpeg?im_w=1200",
         preview: true,
         spotId: 3,
         userId: 3
       },
       //SPOT 4
       {
-        url: "https://media.vrbo.com/lodging/34000000/33950000/33941900/33941841/ceb1db47.jpg?impolicy=resizecrop&rw=1200&ra=fit",
+        url: "https://assets.guesty.com/image/upload/v1711044205/stskuqbujstcc6e56ztr.jpg",
+        preview: true,
+        spotId: 4,
+        userId: 2
+      },
+      {
+        url: "https://assets.guesty.com/image/upload/v1711044205/ruf7crcugfoukozjba6k.jpg",
+        preview: true,
+        spotId: 4,
+        userId: 2
+      },
+      {
+        url: "https://assets.guesty.com/image/upload/v1711044204/kxwuxwgyb56iiqmnc1nz.jpg",
+        preview: true,
+        spotId: 4,
+        userId: 2
+      },
+      {
+        url: "https://assets.guesty.com/image/upload/v1711044205/wbvzu0jdkwtqls4h7eb1.jpg",
         preview: true,
         spotId: 4,
         userId: 2
@@ -63,7 +133,31 @@ module.exports = {
         preview: true,
         spotId: 5,
         userId: 1
-      }
+      },
+      {
+        url: "https://onekindesign.com/wp-content/uploads/2020/01/Modern-Southern-Farmhouse-Steve-Powell-Homes-09-1-Kindesign.jpg",
+        preview: true,
+        spotId: 5,
+        userId: 1
+      },
+      {
+        url: "https://onekindesign.com/wp-content/uploads/2020/01/Modern-Southern-Farmhouse-Steve-Powell-Homes-10-1-Kindesign.jpg",
+        preview: true,
+        spotId: 5,
+        userId: 1
+      },
+      {
+        url: "https://onekindesign.com/wp-content/uploads/2020/01/Modern-Southern-Farmhouse-Steve-Powell-Homes-18-1-Kindesign.jpg",
+        preview: true,
+        spotId: 5,
+        userId: 1
+      },
+      {
+        url: "https://onekindesign.com/wp-content/uploads/2020/01/Modern-Southern-Farmhouse-Steve-Powell-Homes-22-1-Kindesign.jpg",
+        preview: true,
+        spotId: 5,
+        userId: 1
+      },
     ], { validate: true });
   },
 
