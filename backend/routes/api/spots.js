@@ -247,12 +247,13 @@ router.get('/', validateQueryParams, async (req, res, next) => {
             "avgRating",
           ],
           [
-            Sequelize.fn(
-              "MAX",
-              Sequelize.col("SpotImages.url")
-            ),
-            "previewImage"
+            Sequelize.fn("MAX", Sequelize.col("SpotImages.url")),
+            "previewImage",
           ],
+          [
+            Sequelize.fn("MAX", Sequelize.col("SpotImages.id")),
+            "previewImageId",
+          ]
         ]
       },
       include: [
