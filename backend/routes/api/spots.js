@@ -245,7 +245,17 @@ router.get('/', validateQueryParams, async (req, res, next) => {
           [
             Sequelize.fn("AVG", Sequelize.col("Reviews.stars")),
             "avgRating",
-          ]
+          ],
+          [
+            Sequelize.literal(`(
+              SELECT "url" 
+              FROM "SpotImages" 
+              WHERE "SpotImages"."spotId" = "Spot"."id" 
+              AND "SpotImages"."preview" = true 
+              LIMIT 1
+            )`),
+            "previewImage",
+          ],
         ],
       },
       include: [
@@ -256,28 +266,18 @@ router.get('/', validateQueryParams, async (req, res, next) => {
         },
         {
           model: SpotImage,
-          attributes: ["url", "preview"],
-          where: { preview: true },
+          attributes: [],
           required: false, 
         },
       ],
-      group: ["Spot.id", "SpotImages.url"],
+      group: ["Spot.id"],
       limit: size,
       offset: (page - 1) * size,
       subQuery: false,
     });
 
-    const formattedSpots = spots.map((spot) => {
-      const previewImage = spot.SpotImages && spot.SpotImages.length > 0 ? spot.SpotImages[0].url : null;
-      return {
-        ...spot.dataValues,
-        previewImage,  
-      };
-    });
 
-
-
-    res.status(200).json({ Spots: formattedSpots, page, size });
+    res.status(200).json({ Spots: spots, page, size });
     
   } catch (error) {
     next(error);
