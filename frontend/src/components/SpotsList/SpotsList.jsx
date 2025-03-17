@@ -1,8 +1,8 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllSpots } from "../../store/spots";
+import SpotCards from "../subcomponents/spotcards";
 import "./SpotsList.css";
-import SpotCards from "../subcomponents/spotcards"
 
 
 const SpotsList = () => {
@@ -12,7 +12,7 @@ const SpotsList = () => {
     useEffect(() => {
         fetch("/api/spots")
             .then((res) => res.json())
-            .then((data) => { dispatch(getAllSpots(data.spots)) })
+            .then((data) => { dispatch(getAllSpots(data.Spots)) })
     }, [dispatch]);
 
 
@@ -20,12 +20,12 @@ const SpotsList = () => {
 
     return (
         <div>
-           <h1>test test </h1>
-            <div>
-                {spotsExist ? (
+           
+            <div className="spotList">
+            {spotsExist ? (
                     spots.allIds.map((spotId) => {
-                        const spot = spots.byId[spotId];
-                        return <SpotCards key={spotId} spot={spot} />;
+                        const spot = spots.byId[spotId];  
+                        return <SpotCards key={spotId} spot={spot} />;  
                     })
                 ) : (
                     <p>No spots available</p>
