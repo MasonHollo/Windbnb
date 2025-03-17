@@ -20,7 +20,7 @@ const SpotsList = () => {
 
     return (
         <div>
-           
+           <h1>test test test pls work</h1>
             <div className="spotList">
                 {spotsExist ? (
                     spots.allIds.map((spotId) => {
