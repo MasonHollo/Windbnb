@@ -3,7 +3,7 @@
 
 export const getAllSpots = (spots) => ({
     type: "GET_ALL_SPOTS",
-    payload: spots
+    payload: spots || []
 });
 
 // ---- Reducer ---- 
@@ -22,8 +22,12 @@ const spotReducer = (state = initialState, action) => {
             newState.byId = {};
 
             for (let spot of spots) {
-                newState.allIds.push(spot.id);
-                newState.byId[spot.id] = spot;
+                if (spot.id) {
+                    newState.allIds.push(spot.id);
+                    newState.byId[spot.id] = spot;
+                } else {
+                    console.warn("Spot missing id", spot);
+                }
             }
 
             return newState;
