@@ -184,6 +184,9 @@ router.get('/:spotId', async (req, res, next) => {
       where: { spotId },
       raw: true
     });
+
+    const spotImages = spot.SpotImages.filter(image => image.preview);
+
     return res.status(200).json({
       id: spot.id,
       ownerId: spot.ownerId,
@@ -199,8 +202,8 @@ router.get('/:spotId', async (req, res, next) => {
       createdAt: spot.createdAt,
       updatedAt: spot.updatedAt,
       numReviews: reviewStats.numReviews,
-      avgStarRating: reviewStats.avgStarRating,
-      SpotImages: spot.SpotImages,
+      avgStarRating: reviewStats.avgStarRating || 0, 
+      SpotImages: spotImages.length > 0 ? spotImages : [],
       Owner: spot.Owner,
     });
 
