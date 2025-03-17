@@ -21,10 +21,10 @@ const SpotsList = () => {
     return (
         <div>
            <h1>test test test pls work</h1>
-            <div className="spotList">
+            <div>
                 {spotsExist ? (
                     spots.allIds.map((spotId) => {
-                        const spot = spots.byId[spotId];
+                        const spot = spots.allIds[spotId];
                         return spotcards(spot)
                     })
                 ) : (
