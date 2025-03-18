@@ -15,18 +15,24 @@ const SpotDetail = () => {
     if (!spot) {
         return <p>Loading spot details...</p>;
     }
-    
+
     return (
         <div>
             <h3>{spot.name}</h3>
-            <p>Location: {spot.city}, {spot.state}, {spot.country}</p>
+            <p>{spot.city}, {spot.state}, {spot.country}</p>
             <div className="detailsImages">
-                {spot.SpotImages.map((image) => (
-                    <img key={image.id} src={image.url} className="spotImages" />
+                {spot.SpotImages.map((image, index) => (
+                    <img
+                        key={image.id}
+                        src={image.url}
+                        className={index === 0 ? "largeImage" : "smallImage"}
+                        alt={`Spot ${index + 1}`}
+                    />
                 ))}
             </div>
-            <p>{spot.city}, {spot.state}</p>
-            <p>Hosted by {spot.ownerId}</p>
+            {spot.Owner && (
+            <p>Hosted by {spot.Owner.firstName} {spot.Owner.lastName}</p>
+        )}
             <p>{spot.description}</p>
             <p>${spot.price} per night</p>
         </div>

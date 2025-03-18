@@ -1,15 +1,21 @@
 import { Link } from "react-router-dom"
 
-function SpotCards({ spot }){
+function SpotCards({ spot }) {
     return (
         <div>
-        <Link to={`/spots/${spot.id}`} key={spot.id} className="spotItem">
-            <h3>{spot.name}</h3>
-            <img id='spotImage' src={spot.previewImage} alt={spot.name} />
-            <p>{spot.city}, {spot.state}, ⭐{spot.avgRating}</p>
-            <p>${spot.price} per night</p>
-          
-        </Link>
+            <Link to={`/spots/${spot.id}`} key={spot.id} className="spotItem" >
+
+                <img id="spotImage" src={spot.previewImage} alt={spot.name} />
+                <div id="cardInfo">
+                    <div id="location">
+                        <p>{spot.city}, {spot.state}</p>
+                    </div>
+                    <div id="rating">
+                        ⭐{spot.avgRating}
+                    </div>
+                </div>
+                <p id="price">${spot.price} per night</p>
+            </Link>
         </div>
     )
 }
