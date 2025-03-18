@@ -1,23 +1,30 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchAllSpots } from '../../store/spots';
 import "./SpotsDetails.css";
 
 const SpotDetail = () => {
     const { id } = useParams();
-    const [spot, setSpot] = useState();
+    const dispatch = useDispatch();
+    const spot = useSelector(state => state.spots.byId[id]);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        fetch(`/api/spots/${id}`)
-            .then((res) => res.json())
-            .then((data) => { setSpot(data) });
-    }, [id]);
+        if (!spot) {
+            dispatch(fetchAllSpots(id));
+        } else {
+            setLoading(false);
+        }
+    }, [id, dispatch, spot]);
+    console.log(spot)
 
-    if (!spot) {
+    if (loading) {
         return <p>Loading spot details...</p>;
     }
 
     return (
-        <div>
+        <div className="spotDetails">
             <h3>{spot.name}</h3>
             <p>{spot.city}, {spot.state}, {spot.country}</p>
             <div className="detailsImages">
@@ -31,8 +38,8 @@ const SpotDetail = () => {
                 ))}
             </div>
             {spot.Owner && (
-            <p>Hosted by {spot.Owner.firstName} {spot.Owner.lastName}</p>
-        )}
+                <p>Hosted by {spot.Owner.firstName} {spot.Owner.lastName}</p>
+            )}
             <p>{spot.description}</p>
             <p>${spot.price} per night</p>
         </div>

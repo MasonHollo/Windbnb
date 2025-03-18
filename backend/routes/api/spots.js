@@ -262,8 +262,13 @@ router.get('/', validateQueryParams, async (req, res, next) => {
           where: { preview: true }, 
           required: false, 
         },
+        {
+          model: User,
+          as: 'Owner',
+          attributes: ['id', 'firstName', 'lastName']
+        }
       ],
-      group: ["Spot.id", "SpotImages.id"],
+      group: ["Spot.id", "SpotImages.id", "Owner.id"],
       limit: size,
       offset: (page - 1) * size,
       subQuery: false,
