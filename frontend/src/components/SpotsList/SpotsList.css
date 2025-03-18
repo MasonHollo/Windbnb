@@ -5,7 +5,7 @@
   padding: 20px;
 }
 
-.spotItem {
+.spotItem{
 background-color: burlywood;
 display: flex;
 flex-direction: column;
@@ -17,15 +17,15 @@ height: 270px;
 
 }
 
-.spotcard:hover {
+.spotcard:hover{
 /* background-color: blueviolet; */
 cursor: pointer;
+box-shadow: 0 4px 8px rgba(0, 0, 0, .5);
 }
 
 #spotImage{
 height: 180px;
 }
-
 #cardInfo {
 display: flex;
 justify-content: space-between;

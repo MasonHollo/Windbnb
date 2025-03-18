@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchAllSpots } from '../../store/spots';
 import "./SpotsDetails.css";
+import { Link } from 'react-router-dom';
 
 const SpotDetail = () => {
     const { id } = useParams();
@@ -17,7 +18,6 @@ const SpotDetail = () => {
             setLoading(false);
         }
     }, [id, dispatch, spot]);
-    console.log(spot)
 
     if (loading) {
         return <p>Loading spot details...</p>;
@@ -37,11 +37,29 @@ const SpotDetail = () => {
                     />
                 ))}
             </div>
-            {spot.Owner && (
-                <p>Hosted by {spot.Owner.firstName} {spot.Owner.lastName}</p>
-            )}
-            <p>{spot.description}</p>
-            <p>${spot.price} per night</p>
+            <>
+                <div>
+
+                    {spot.Owner && (
+                        <p>Hosted by {spot.Owner.firstName} {spot.Owner.lastName} </p>
+                    )}
+                </div>
+
+                <div className='reserveBox'>
+                    <p className='spotDescrip'>{spot.description}</p>
+                    <div className='buttonContainer'>
+                        <div className='topAreaButton'>
+
+                        <p className='price'>${spot.price} night</p>
+                        <p className='reviewSection'> ⭐ {spot.avgRating} · {spot.numReviews} reviews</p>
+                        </div>
+                        <Link to={`/reviews`} className="reviewLink" >
+                            <button className='reserveButton'>Reserve</button>
+                        </Link>
+                    </div>
+                </div>
+
+            </>
         </div>
     );
 };

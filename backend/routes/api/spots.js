@@ -200,7 +200,7 @@ router.get('/:spotId', async (req, res, next) => {
       price: spot.price,
       createdAt: spot.createdAt,
       updatedAt: spot.updatedAt,
-      numReviews: reviewStats.numReviews,
+      numReviews: reviewStats.numReviews || 0,
       avgStarRating: reviewStats.avgStarRating || 0, 
       SpotImages: spot.SpotImages,
       previewImage,
@@ -240,6 +240,10 @@ router.get('/', validateQueryParams, async (req, res, next) => {
       where: query,
       attributes: {
         include: [
+          [
+            Sequelize.fn("COUNT", Sequelize.col("Reviews.id")),
+            "numReviews",
+          ],
           [
             Sequelize.fn("AVG", Sequelize.col("Reviews.stars")),
             "avgRating",
