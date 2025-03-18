@@ -11,7 +11,7 @@ function SpotCards({ spot }) {
                         <p>{spot.city}, {spot.state}</p>
                     </div>
                     <div id="rating">
-                        ⭐{spot.avgRating}
+                       ⭐ {spot.avgRating || " New"} 
                     </div>
                 </div>
                 <p id="price">${spot.price} per night</p>

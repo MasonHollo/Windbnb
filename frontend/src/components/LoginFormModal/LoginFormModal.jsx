@@ -24,8 +24,15 @@ function LoginFormModal() {
       });
   };
 
+  const demoLogin = () => {
+    return dispatch(sessionActions.login({ credential: "FakeUser2", password: 'password3'}))
+      .then(closeModal)
+  }
+
   return (
+    <div className='loginModal'>
     <>
+
       <h1 id= 'loginheader'>Log In</h1>
       <form onSubmit={handleSubmit}>
         <label id='usernameinput'>
@@ -35,7 +42,7 @@ function LoginFormModal() {
             value={credential}
             onChange={(e) => setCredential(e.target.value)}
             required
-          />
+            />
         </label>
         <label id='passwordinput'>
           Password
@@ -44,14 +51,16 @@ function LoginFormModal() {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
-          />
+            />
         </label>
         {errors.credential && (
           <p>{errors.credential}</p>
         )}
         <button id="loginbutton" type="submit">Log In</button>
       </form>
+      <button id="loginbutton" onClick={demoLogin}>Demo User</button>
     </>
+        </div>
   );
 }
 

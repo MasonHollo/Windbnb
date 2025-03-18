@@ -3,7 +3,6 @@ import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchAllSpots } from '../../store/spots';
 import "./SpotsDetails.css";
-import { Link } from 'react-router-dom';
 
 const SpotDetail = () => {
     const { id } = useParams();
@@ -51,11 +50,9 @@ const SpotDetail = () => {
                         <div className='topAreaButton'>
 
                         <p className='price'>${spot.price} night</p>
-                        <p className='reviewSection'> ⭐ {spot.avgRating} · {spot.numReviews} reviews</p>
+                        <p className='reviewSection'>  ⭐ {spot.avgRating || " New"}  · {spot.numReviews} reviews</p>
                         </div>
-                        <Link to={`/reviews`} className="reviewLink" >
-                            <button className='reserveButton'>Reserve</button>
-                        </Link>
+                            <button onClick={() => alert("Feature coming soon") } className='reserveButton'>Reserve</button>
                     </div>
                 </div>
 
