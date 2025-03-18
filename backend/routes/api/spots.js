@@ -245,7 +245,7 @@ router.get('/', validateQueryParams, async (req, res, next) => {
             "numReviews",
           ],
           [
-            Sequelize.fn("AVG", Sequelize.col("Reviews.stars")),
+            Sequelize.fn("ROUND", Sequelize.fn("AVG", Sequelize.col("Reviews.stars")), 1),
             "avgRating",
           ],
           [

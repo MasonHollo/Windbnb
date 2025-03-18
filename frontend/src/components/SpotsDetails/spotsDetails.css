@@ -83,15 +83,15 @@
     box-shadow: 4px 4px 4px black;
     bottom: 10px;
   }
-  .reviewLink .reserveButton{
+  .reserveButton{
     background-color: salmon;
-    width: 100%;
+    width: 90%;
     height: 36px;  
     margin-bottom: 30px;
     color: white;
     box-shadow: 4px 4px 4px black;
     bottom: 10px;
   }
-  .reviewLink .reserveButton:hover{
+  .reserveButton:hover{
     cursor: pointer;
   }
