@@ -45,13 +45,13 @@
   font-weight: bold; 
 }
 .spotName {
-  visibility: hidden;  /* Make the spot name hidden by default */
+  visibility: hidden;  
   position: absolute;
   top: 10px;
   left: 10px;
-  color: black;  /* Optional: Make the name stand out against the image */
+  color: black;
 }
 
 .spotItem:hover .spotName {
-  visibility: visible;  /* Make the spot name visible when hovering over the card */
+  visibility: visible; 
 }
