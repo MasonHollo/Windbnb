@@ -36,6 +36,10 @@ const router = createBrowserRouter([
       {
         path: '/spots/:id',
         element: <SpotDetail />
+      },
+      {
+        path: '/reviews',
+        element: <h1>FEATURE COMING SOON</h1>
       }
     ]
   }
