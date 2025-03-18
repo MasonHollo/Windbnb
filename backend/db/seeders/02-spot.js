@@ -19,7 +19,7 @@ module.exports = {
         lat: 37.7645358,
         lng: -122.4730327,
         name: "Baker Beach Home",
-        description: "Place where web developers are created",
+        description: "Beach house in SF. Beach house in SF. Beach house in SF. Beach house in SF. Beach house in SF. Beach house in SF. Beach house in SF. Beach house in SF.Beach house in SF. Beach house in SF. Beach house in SF. Beach house in SF.Beach house in SF. Beach house in SF. Beach house in SF. Beach house in SF.Beach house in SF. Beach house in SF. Beach house in SF. Beach house in SF.Beach house in SF. Beach house in SF. Beach house in SF. Beach house in SF.",
         price: 123
       },
       {
@@ -31,7 +31,7 @@ module.exports = {
         lat: 25.7617,
         lng: -80.1918,
         name: "Beachside Bungalow",
-        description: "A relaxing beachside retreat",
+        description: " A relaxing beachside bungalow. A relaxing beachside bungalow. A relaxing beachside bungalow. A relaxing beachside bungalow.  A relaxing beachside bungalow. A relaxing beachside bungalow. A relaxing beachside bungalow. A relaxing beachside bungalow. A relaxing beachside bungalow. A relaxing beachside bungalow. A relaxing beachside bungalow. A relaxing beachside bungalow. A relaxing beachside bungalow. A relaxing beachside bungalow. A relaxing beachside bungalow. A relaxing beachside bungalow.",
         price: 200
       },
       {
@@ -43,7 +43,7 @@ module.exports = {
         lat: 39.7392,
         lng: -104.9903,
         name: "Mountain Cabin",
-        description: "A cozy cabin in the mountains",
+        description: "A cozy cabin in the mountains. A cozy cabin in the mountains. A cozy cabin in the mountains. A cozy cabin in the mountains. A cozy cabin in the mountains. A cozy cabin in the mountains. A cozy cabin in the mountains. A cozy cabin in the mountains. A cozy cabin in the mountains. A cozy cabin in the mountains.A cozy cabin in the mountains. A cozy cabin in the mountains. A cozy cabin in the mountains. A cozy cabin in the mountains. A cozy cabin in the mountains.A cozy cabin in the mountains. A cozy cabin in the mountains. A cozy cabin in the mountains. A cozy cabin in the mountains. A cozy cabin in the mountains.",
         price: 150
       },
       {
@@ -55,7 +55,7 @@ module.exports = {
         lat: 39.7392,
         lng: -104.9903,
         name: "Desert Paradise",
-        description: "A desert home in the mountiants with a view of the city",
+        description: "A desert home in the AZ. A desert home in the AZ. A desert home in the AZ. A desert home in the AZ. A desert home in the AZ. A desert home in the AZ. A desert home in the AZ. A desert home in the AZ. A desert home in the AZ. A desert home in the AZ. A desert home in the AZ. A desert home in the AZ. A desert home in the AZ. A desert home in the AZ. A desert home in the AZ. A desert home in the AZ. A desert home in the AZ. A desert home in the AZ. A desert home in the AZ. A desert home in the AZ. A desert home in the AZ. A desert home in the AZ. A desert home in the AZ. A desert home in the AZ. A desert home in the AZ. ",
         price: 150
       },
       {
@@ -67,7 +67,7 @@ module.exports = {
         lat: 39.7392,
         lng: -104.9903,
         name: "Country Farmhouse",
-        description: "A southern farmhouse in the rural countryside",
+        description: "A southern farmhouse in the rural countryside. A southern farmhouse in the rural countryside. A southern farmhouse in the rural countryside. A southern farmhouse in the rural countryside, A southern farmhouse in the rural countryside, A southern farmhouse in the rural countryside. A southern farmhouse in the rural countryside. A southern farmhouse in the rural countryside. A southern farmhouse in the rural countryside. A southern farmhouse in the rural countryside. A southern farmhouse in the rural countryside. A southern farmhouse in the rural countryside. A southern farmhouse in the rural countryside.",
         price: 150
       }
     ], { validate: true });
