@@ -1,25 +1,54 @@
 #loginheader{
-    background-color: thistle;
     display: flex;
-    align-items: center;
     justify-content: center;
+    align-items: center;
+    margin-top: -50px;
+
 }
 #usernameinput{
-    background-color: yellow;
     display: flex;
+    justify-content: center;
     align-items: center;
+    margin-bottom: 10px;
 }
 #passwordinput{
-    background-color: yellowgreen;
     display: flex;
+    justify-content: center;
     align-items: center;
+    margin-bottom: 10px;
 }
 #loginbutton{
-    background-color: blue;
+    background-color: salmon;
     display: flex;
+    justify-content: center;
     align-items: center;
-}
-.loginModal{
-    background-color: tomato;
+    margin-top: 20px;
     width: 100%;
+    height: 40px;
+    color: white;
+    box-shadow: 4px 4px black;
+
+}
+#demologinbutton{
+    background-color: salmon;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+   margin-left: 38%;
+    margin-top: 10px;
+    color: white;
+    box-shadow: 4px 4px black;
+  
+}
+#modal-content{
+    width: 35%;
+    height: 40%;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 20px
+}
+.errormesg{
+    color: salmon;
 }

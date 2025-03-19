@@ -6,6 +6,8 @@ import OpenModalMenuItem from './OpenModalMenuItem';
 import LoginFormModal from '../LoginFormModal';
 import SignupFormModal from '../SignupFormModal';
 import './ProfileButton.css'
+import { NavLink } from 'react-router-dom';
+
 
 function ProfileButton({ user }) {
   const dispatch = useDispatch();
@@ -39,7 +41,7 @@ function ProfileButton({ user }) {
     closeMenu();
   };
 
-  const ulClassName = "profile-dropdown" + (showMenu ? "" : " hidden");
+  const ulClassName = "profile-dropdown" + (showMenu ? "" : " hidden")+(user ? " dropdownloggedin" : " dropdownloggedout");
 
   return (
     <>
@@ -48,15 +50,15 @@ function ProfileButton({ user }) {
         <FaUserCircle />
         
       </button>
-      <ul className={ulClassName} ref={ulRef}>
+      <div className={ulClassName} ref={ulRef}>
         {user ? (
           <>
-            <li>{user.username}</li>
-            <li>{user.firstName} {user.lastName}</li>
-            <li>{user.email}</li>
-            <li>
-              <button onClick={logout}>Log Out</button>
-            </li>
+            <p className='loginptag'>Hello, {user.firstName}</p>
+            <p className='loginptag'>{user.email}</p>
+            <NavLink id='managespotslink' to='/'>Manage Spots</NavLink>
+            <>
+              <button id='logout' onClick={logout}>Log Out</button>
+            </>
           </>
         ) : (
           <>
@@ -72,7 +74,7 @@ function ProfileButton({ user }) {
             />
           </>
         )}
-      </ul>
+      </div>
     </>
   );
 }
