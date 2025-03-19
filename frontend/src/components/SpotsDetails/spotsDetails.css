@@ -47,6 +47,8 @@
     align-items: center;
     height: 150px;
     position: relative;
+    min-width: 270px;
+    min-height: 130px;
     
   }
   .topAreaButton {
@@ -95,3 +97,5 @@
   .reserveButton:hover{
     cursor: pointer;
   }
+
+  
