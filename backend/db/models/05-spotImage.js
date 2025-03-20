@@ -12,27 +12,29 @@ module.exports = (sequelize, DataTypes) => {
   SpotImage.init(
     {
       url: {
-        type: DataTypes.STRING,
+        type: DataTypes.STRING(500),
         allowNull: false
       },
       preview: {
         type: DataTypes.BOOLEAN,
         allowNull: false
-      }
-      // spotId: {
-      //   type: DataTypes.INTEGER,
-      //   allowNull: false,
-      //   references: { model: 'Spots', key: 'id' }
-      // }, 
-      // userId: {
-      //   type: DataTypes.INTEGER,
-      //   allowNull: true,
-      //   references: { model: 'Users', key: 'id'}
-      // },
+      },
+      spotId: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        references: { model: 'Spots', key: 'id' }
+      }, 
+      userId: {
+        type: DataTypes.INTEGER,
+        allowNull: true,
+        references: { model: 'Users', key: 'id' }
+      
     },
+  },
     {
       sequelize,
-      modelName: 'SpotImage'
+      modelName: 'SpotImage',
+    
     }
   );
   return SpotImage;

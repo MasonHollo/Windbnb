@@ -125,7 +125,13 @@ router.get('/current', requireAuth, async (req, res, next) => {
             "avgRating",
           ],
           [
-            Sequelize.literal("'image url'"),
+            Sequelize.literal(`(
+              SELECT "url" 
+              FROM "SpotImages" 
+              WHERE "SpotImages"."spotId" = "Spot"."id" 
+              AND "SpotImages"."preview" = true 
+              LIMIT 1
+            )`),
             "previewImage",
           ],
         ],
@@ -178,6 +184,8 @@ router.get('/:spotId', async (req, res, next) => {
       where: { spotId },
       raw: true
     });
+
+    const previewImage = spot.SpotImages.length > 0 ? spot.SpotImages.find(image => image.preview)?.url : null;
     return res.status(200).json({
       id: spot.id,
       ownerId: spot.ownerId,
@@ -192,9 +200,10 @@ router.get('/:spotId', async (req, res, next) => {
       price: spot.price,
       createdAt: spot.createdAt,
       updatedAt: spot.updatedAt,
-      numReviews: reviewStats.numReviews,
-      avgStarRating: reviewStats.avgStarRating,
+      numReviews: reviewStats.numReviews || 0,
+      avgStarRating: reviewStats.avgStarRating || 0, 
       SpotImages: spot.SpotImages,
+      previewImage,
       Owner: spot.Owner,
     });
 
@@ -232,30 +241,46 @@ router.get('/', validateQueryParams, async (req, res, next) => {
       attributes: {
         include: [
           [
-            Sequelize.fn("AVG", Sequelize.col("Reviews.stars")),
+            Sequelize.fn("COUNT", Sequelize.col("Reviews.id")),
+            "numReviews",
+          ],
+          [
+            Sequelize.fn("ROUND", Sequelize.fn("AVG", Sequelize.col("Reviews.stars")), 1),
             "avgRating",
           ],
           [
-            Sequelize.literal("'image url'"),
+            Sequelize.fn("MAX", Sequelize.col("SpotImages.url")),
             "previewImage",
           ],
-        ],
+        ]
       },
       include: [
         {
           model: Review,
           attributes: [],
-          required: false
+          required: false,
         },
+        {
+          model: SpotImage,
+          attributes: ["id", "url"],
+          where: { preview: true }, 
+          required: false, 
+        },
+        {
+          model: User,
+          as: 'Owner',
+          attributes: ['id', 'firstName', 'lastName']
+        }
       ],
-      group: ["Spot.id"],
+      group: ["Spot.id", "SpotImages.id", "Owner.id"],
       limit: size,
       offset: (page - 1) * size,
-      subQuery: false
+      subQuery: false,
     });
-
-
+    
     res.status(200).json({ Spots: spots, page, size });
+    
+    
   } catch (error) {
     next(error);
   }
