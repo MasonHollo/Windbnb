@@ -15,9 +15,12 @@ function Navigation({ isLoaded }) {
         </NavLink>
       </div>
       <div id='newspotform'>
-      <NavLink to='/spots/new'>
+        {sessionUser && (
+
+          <NavLink to='/spots/new'>
         <p>Creat a New Spot</p>
       </NavLink>
+        )}
       </div>
       <div id='profile'>
         {isLoaded && (
