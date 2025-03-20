@@ -5,6 +5,7 @@ import Navigation from './components/Navigation';
 import * as sessionActions from './store/session';
 import SpotsList from './components/SpotsList/SpotsList';
 import SpotDetail from './components/SpotsDetails/SpotsDetails';
+import CreateSpot from './components/CreateSpot/CreateSpot';
 
 
 function Layout() {
@@ -39,7 +40,7 @@ const router = createBrowserRouter([
       },
       {
         path: '/spots/new',
-        element: <h1>FEATURE COMING SOON</h1>
+        element: <CreateSpot />
       }
     ]
   }
