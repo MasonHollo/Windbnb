@@ -20,7 +20,7 @@ const SpotsList = () => {
         <div className="spotList">
             {spotsExist ? (
                 spots.allSpots.map((spot) => {
-                    const spotImage = spot.images && spot.images.length > 0 ? spot.images[0].url : null;
+                    const spotImage = spot.previewImage || null;
                     return <SpotCards key={spot.id} spot={spot} spotImage={spotImage} />;
                 })
             ) : (
