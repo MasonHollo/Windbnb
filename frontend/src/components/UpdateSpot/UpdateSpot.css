@@ -1,0 +1,10 @@
+.updatespot{
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+   }
+
+   .errorMessage{
+    color: salmon;
+   }

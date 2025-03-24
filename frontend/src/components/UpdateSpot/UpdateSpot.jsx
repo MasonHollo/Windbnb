@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import { updateSpotThunk } from '../../store/spots';
+import './UpdateSpot.css'
 
 function UpdateSpot() {
   const dispatch = useDispatch();
@@ -86,6 +87,8 @@ function UpdateSpot() {
 
   return (
     <>
+    <div className='updatespot'>
+
       <button type='button' onClick={handleDemoSpot}>Demo Data</button>
       <h1 id='createspotitle'>Update your Spot</h1>
       <form onSubmit={handleSubmit}>
@@ -99,8 +102,8 @@ function UpdateSpot() {
               placeholder='Country'
               value={country}
               onChange={(e) => setCountry(e.target.value)}
-
-            />
+              
+              />
           </label>
           {errors.country && <p className="errorMessage">{errors.country}</p>}
           <label className='inputs'>
@@ -109,7 +112,7 @@ function UpdateSpot() {
               placeholder='Street Address'
               value={address}
               onChange={(e) => setAddress(e.target.value)}
-            />
+              />
           </label>
           {errors.address && <p className='errorMessage'>{errors.address}</p>}
           <label className='inputs'>
@@ -119,7 +122,7 @@ function UpdateSpot() {
               value={city}
               onChange={(e) => setCity(e.target.value)}
               required
-            />
+              />
           </label>
           {errors.city && <p className='errorMessage'>{errors.city}</p>}
           <label className='inputs'>
@@ -129,7 +132,7 @@ function UpdateSpot() {
               value={state}
               onChange={(e) => setState(e.target.value)}
               required
-            />
+              />
           </label>
           {errors.state && <p className='errorMessage'>{errors.state}</p>}
           <label className='inputs'>
@@ -139,7 +142,7 @@ function UpdateSpot() {
               value={lat}
               onChange={(e) => setLat(e.target.value)}
               required
-            />
+              />
           </label>
           {errors.lat && <p className='errorMessage'>{errors.lat}</p>}
           <label className='inputs'>
@@ -149,7 +152,7 @@ function UpdateSpot() {
               value={lng}
               onChange={(e) => setLng(e.target.value)}
               required
-            />
+              />
           </label>
           {errors.lng && <p className='errorMessage'>{errors.lng}</p>}
         </div>
@@ -163,7 +166,7 @@ function UpdateSpot() {
               value={description}
               onChange={(e) => setDescription(e.target.value)}
               required
-            />
+              />
           </label>
           {errors.description && <p className='errorMessage'>{errors.description}</p>}
         </div>
@@ -177,7 +180,7 @@ function UpdateSpot() {
               value={name}
               onChange={(e) => setName(e.target.value)}
               required
-            />
+              />
           </label>
           {errors.name && <p className='errorMessage'>{errors.name}</p>}
         </div>
@@ -191,7 +194,7 @@ function UpdateSpot() {
               value={price}
               onChange={(e) => setPrice(e.target.value)}
               required
-            />
+              />
           </label>
           {errors.previewImage && <p className='errorMessage'>{errors.previewImage}</p>}
         </div>
@@ -204,8 +207,8 @@ function UpdateSpot() {
               placeholder='Preview Image URL'
               value={previewImage}
               onChange={(e) => setPreviewImage(e.target.value)}
-
-            />
+              
+              />
           </label>
           {spotImages.map((image, index) => (
             <label key={index} className='inputs'>
@@ -218,13 +221,14 @@ function UpdateSpot() {
                   updatedImages[index] = e.target.value;
                   setSpotImages(updatedImages);
                 }}
-              />
+                />
             </label>
           ))}
           {errors.spotImages && <p className='errorMessage'>{errors.spotImages}</p>}
           <button id="submitbutton" type="submit">Update Spot</button>
         </div>
       </form>
+          </div>
     </>
   );
 }
