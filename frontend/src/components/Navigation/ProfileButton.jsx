@@ -6,16 +6,17 @@ import OpenModalMenuItem from './OpenModalMenuItem';
 import LoginFormModal from '../LoginFormModal';
 import SignupFormModal from '../SignupFormModal';
 import './ProfileButton.css'
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 
 
 function ProfileButton({ user }) {
   const dispatch = useDispatch();
   const [showMenu, setShowMenu] = useState(false);
   const ulRef = useRef();
+  const navigate = useNavigate()
 
   const toggleMenu = (e) => {
-    e.stopPropagation(); // Keep from bubbling up to document and triggering closeMenu
+    e.stopPropagation(); 
     setShowMenu(!showMenu);
   };
 
@@ -39,6 +40,7 @@ function ProfileButton({ user }) {
     e.preventDefault();
     dispatch(sessionActions.logout());
     closeMenu();
+    navigate('/')
   };
 
   const ulClassName = "profile-dropdown" + (showMenu ? "" : " hidden")+(user ? " dropdownloggedin" : " dropdownloggedout");
@@ -55,7 +57,7 @@ function ProfileButton({ user }) {
           <>
             <p className='loginptag'>Hello, {user.firstName}</p>
             <p className='loginptag'>{user.email}</p>
-            <NavLink id='managespotslink' to='/'>Manage Spots</NavLink>
+            <NavLink id='managespotslink' to='/spots/current'>Manage Spots</NavLink>
             <>
               <button id='logout' onClick={logout}>Log Out</button>
             </>
