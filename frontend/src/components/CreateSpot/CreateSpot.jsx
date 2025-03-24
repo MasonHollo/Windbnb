@@ -67,6 +67,8 @@ function CreateSpot() {
 
   return (
     <>
+    <div className='createspot'>
+
     <button type='button' onClick={handleDemoSpot}>Demo Data</button>
       <h1 id='createspotitle'>Create A Spot</h1>
       <form onSubmit={handleSubmit}>
@@ -81,7 +83,7 @@ function CreateSpot() {
               value={country}
               onChange={(e) => setCountry(e.target.value)}
               
-            />
+              />
           </label>
           {errors.country && <p className='errormesg'>{errors.country}</p>}
           <label className='inputs'>
@@ -91,7 +93,7 @@ function CreateSpot() {
               value={address}
               onChange={(e) => setAddress(e.target.value)}
               
-            />
+              />
           </label>
           {errors.address && <p className='errormesg'>{errors.address}</p>}
           <label className='inputs'>
@@ -101,7 +103,7 @@ function CreateSpot() {
               value={city}
               onChange={(e) => setCity(e.target.value)}
               
-            />
+              />
           </label>
           {errors.city && <p className='errormesg'>{errors.city}</p>}
           <label className='inputs'>
@@ -111,7 +113,7 @@ function CreateSpot() {
               value={state}
               onChange={(e) => setState(e.target.value)}
               
-            />
+              />
           </label>
           {errors.state && <p className='errormesg'>{errors.state}</p>}
           <label className='inputs'>
@@ -121,7 +123,7 @@ function CreateSpot() {
               value={lat}
               onChange={(e) => setLat(e.target.value)}
               
-            />
+              />
           </label>
           {errors.lat && <p className='errormesg'>{errors.lat}</p>}
           <label className='inputs'>
@@ -130,8 +132,8 @@ function CreateSpot() {
               placeholder='Longitude'
               value={lng}
               onChange={(e) => setLng(e.target.value)}
-            
-            />
+              
+              />
           </label>
           {errors.lng && <p className='errormesg'>{errors.lng}</p>}
         </div>
@@ -147,7 +149,7 @@ function CreateSpot() {
               value={description}
               onChange={(e) => setDescription(e.target.value)}
               
-            />
+              />
           </label>
           {errors.description && <p className='errormesg'>{errors.description}</p>}
         </div>
@@ -162,8 +164,8 @@ function CreateSpot() {
               placeholder='Name of your spot'
               value={name}
               onChange={(e) => setName(e.target.value)}
-            
-            />
+              
+              />
           </label>
           {errors.name && <p className='errormesg'>{errors.name}</p>}
         </div>
@@ -178,8 +180,8 @@ function CreateSpot() {
               placeholder='Price per night (USD)'
               value={price}
               onChange={(e) => setPrice(e.target.value)}
-             
-            />
+              
+              />
           </label>
           {errors.previewImage && <p className='errormesg'>{errors.previewImage}</p>}
         </div>
@@ -195,7 +197,7 @@ function CreateSpot() {
               value={previewImage}
               onChange={(e) => setPreviewImage(e.target.value)}
               
-            />
+              />
           </label>
           {spotImages.map((image, index) => (
             <label key={index} className='inputs'>
@@ -208,13 +210,14 @@ function CreateSpot() {
                   updatedImages[index] = e.target.value;
                   setSpotImages(updatedImages);
                 }}
-              />
+                />
             </label>
           ))}
           {errors.spotImages && <p className='errormesg'>{errors.spotImages}</p>}
           <button id="submitbutton" type="submit">Create Spot</button>
         </div>
       </form>
+          </div>
     </>
   );
 }
