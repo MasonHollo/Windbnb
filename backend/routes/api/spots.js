@@ -268,7 +268,7 @@ router.get('/', validateQueryParams, async (req, res, next) => {
           attributes: ['id', 'url', 'preview']
         },
       ],
-      group: ["Spot.id"],
+      group: ["Spot.id", "spotImages.id"],
       limit: size,
       offset: (page - 1) * size,
       subQuery: false,
