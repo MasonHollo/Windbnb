@@ -216,10 +216,10 @@ router.get('/:spotId', async (req, res, next) => {
   }
 });
 
-//GET ALL SPOTS & QUERY
 router.get('/', validateQueryParams, async (req, res, next) => {
   try {
     let { minLat, maxLat, minLng, maxLng, minPrice, maxPrice, page, size } = req.query;
+
 
     page = parseInt(page);
     size = parseInt(size);
@@ -240,41 +240,49 @@ router.get('/', validateQueryParams, async (req, res, next) => {
 
     const spots = await Spot.findAll({
       where: query,
-      attributes: [
-        'id',
-        'ownerId',
-        'address',
-        'city',
-        'state',
-        'country',
-        'lat',
-        'lng',
-        'name',
-        'description',
-        'price',
-        [
-          Sequelize.fn("AVG", Sequelize.col("Reviews.stars")),
-          "avgRating",
-        ],
-      ],
+      attributes: {
+        include: [
+          [
+            Sequelize.fn("COUNT", Sequelize.col("Reviews.id")),
+            "numReviews",
+          ],
+          [
+            Sequelize.fn("ROUND", Sequelize.fn("AVG", Sequelize.col("Reviews.stars")), 1),
+            "avgRating",
+          ],
+          [
+            Sequelize.fn("MAX", Sequelize.col("SpotImages.url")),
+            "previewImage",
+          ],
+        ]
+      },
       include: [
         {
           model: Review,
           attributes: [],
           required: false,
         },
-         {
+        {
           model: SpotImage,
-          attributes: ['id', 'url', 'preview']
+          attributes: ["id", "url"],
+          where: { preview: true }, 
+          required: false, 
         },
+        {
+          model: User,
+          as: 'Owner',
+          attributes: ['id', 'firstName', 'lastName']
+        }
       ],
-      group: ["Spot.id"],
+      group: ["Spot.id", "Owner.id"],
       limit: size,
       offset: (page - 1) * size,
       subQuery: false,
     });
     
     res.status(200).json({ Spots: spots, page, size });
+    
+    
   } catch (error) {
     next(error);
   }
