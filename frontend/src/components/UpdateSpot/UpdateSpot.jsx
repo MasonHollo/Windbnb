@@ -121,7 +121,7 @@ function UpdateSpot() {
               placeholder='City'
               value={city}
               onChange={(e) => setCity(e.target.value)}
-              required
+            
               />
           </label>
           {errors.city && <p className='errorMessage'>{errors.city}</p>}
@@ -131,7 +131,7 @@ function UpdateSpot() {
               placeholder='State'
               value={state}
               onChange={(e) => setState(e.target.value)}
-              required
+            
               />
           </label>
           {errors.state && <p className='errorMessage'>{errors.state}</p>}
@@ -141,7 +141,7 @@ function UpdateSpot() {
               placeholder='Latitude'
               value={lat}
               onChange={(e) => setLat(e.target.value)}
-              required
+           
               />
           </label>
           {errors.lat && <p className='errorMessage'>{errors.lat}</p>}
@@ -151,7 +151,7 @@ function UpdateSpot() {
               placeholder='Longitude'
               value={lng}
               onChange={(e) => setLng(e.target.value)}
-              required
+             
               />
           </label>
           {errors.lng && <p className='errorMessage'>{errors.lng}</p>}
@@ -165,7 +165,7 @@ function UpdateSpot() {
               placeholder='Please write at least 30 characters'
               value={description}
               onChange={(e) => setDescription(e.target.value)}
-              required
+              
               />
           </label>
           {errors.description && <p className='errorMessage'>{errors.description}</p>}
@@ -179,7 +179,7 @@ function UpdateSpot() {
               placeholder='Name of your spot'
               value={name}
               onChange={(e) => setName(e.target.value)}
-              required
+          
               />
           </label>
           {errors.name && <p className='errorMessage'>{errors.name}</p>}
@@ -193,7 +193,7 @@ function UpdateSpot() {
               placeholder='Price per night (USD)'
               value={price}
               onChange={(e) => setPrice(e.target.value)}
-              required
+          
               />
           </label>
           {errors.previewImage && <p className='errorMessage'>{errors.previewImage}</p>}
