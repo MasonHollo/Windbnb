@@ -24,7 +24,7 @@ export const deleteReviewAction = (reviewId) => ({
 // ---- Thunk Action ----
 
 export const getAllReviewsThunk = (spotId) => async (dispatch) => {
-    try {
+ 
         const res = await csrfFetch(`/api/spots/${spotId}/reviews`);
         if (res.ok) {
             const data = await res.json();
@@ -32,9 +32,7 @@ export const getAllReviewsThunk = (spotId) => async (dispatch) => {
         } else {
             throw res;
         }
-    } catch (error) {
-        throw (error);
-    }
+   
 };
 
 export const createReviewThunk = (spotId, review) => async (dispatch) => {
