@@ -24,4 +24,3 @@ const DeleteRevModal = ({ reviewId }) => {
 };
 
 export default DeleteRevModal;
-
