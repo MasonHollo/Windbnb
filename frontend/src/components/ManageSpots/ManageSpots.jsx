@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteSpotThunk, getAllSpotsThunk } from "../../store/spots"; 
 import SpotCards from "../subcomponents/spotcards";
@@ -12,7 +12,7 @@ const ManageSpots = () => {
     const navigate = useNavigate();
     const spots = useSelector(state => state.spots);
     const currentUser = useSelector(state => state.session.user);
-    const [setSpotToDelete] = useState(null);
+   
     const { setModalContent, openModal, closeModal } = useModal();
 
     useEffect(() => {
@@ -28,7 +28,6 @@ const ManageSpots = () => {
         navigate(`/spots/${spotId}/edit`); 
     };
     const openDeleteModal = (spotId) => {
-        setSpotToDelete(spotId); 
         setModalContent(
             <DeleteModal 
                 spotId={spotId} 
@@ -36,7 +35,7 @@ const ManageSpots = () => {
                 closeModal={closeModal}
             />
         );
-        openModal; 
+        openModal(); 
     };
 
     const handleDelete = async (spotId) => {

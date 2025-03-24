@@ -1,6 +1,4 @@
 
-
-
 const DeleteModal = ({ spotId, handleDelete, closeModal }) => {
     const confirmDelete = () => {
         handleDelete(spotId);
