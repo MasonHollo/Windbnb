@@ -7,11 +7,7 @@ function UpdateSpot() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { id } = useParams();
-  console.log(id)
-
   const spot = useSelector((state) => state.spots.byId[id]);
-  console.log(spot)
-
   const [country, setCountry] = useState(spot.country || "");
   const [address, setAddress] = useState(spot.address || "");
   const [city, setCity] = useState(spot.city || "");
@@ -106,7 +102,7 @@ function UpdateSpot() {
 
             />
           </label>
-          {errors.country && <p className='errormesg'>{errors.country}</p>}
+          {errors.country && <p className="errorMessage">{errors.country}</p>}
           <label className='inputs'>
             <input
               type="text"
@@ -115,7 +111,7 @@ function UpdateSpot() {
               onChange={(e) => setAddress(e.target.value)}
             />
           </label>
-          {errors.address && <p className='errormesg'>{errors.address}</p>}
+          {errors.address && <p className='errorMessage'>{errors.address}</p>}
           <label className='inputs'>
             <input
               type="text"
@@ -125,7 +121,7 @@ function UpdateSpot() {
               required
             />
           </label>
-          {errors.city && <p className='errormesg'>{errors.city}</p>}
+          {errors.city && <p className='errorMessage'>{errors.city}</p>}
           <label className='inputs'>
             <input
               type="text"
@@ -135,7 +131,7 @@ function UpdateSpot() {
               required
             />
           </label>
-          {errors.state && <p className='errormesg'>{errors.state}</p>}
+          {errors.state && <p className='errorMessage'>{errors.state}</p>}
           <label className='inputs'>
             <input
               type="number"
@@ -145,7 +141,7 @@ function UpdateSpot() {
               required
             />
           </label>
-          {errors.lat && <p className='errormesg'>{errors.lat}</p>}
+          {errors.lat && <p className='errorMessage'>{errors.lat}</p>}
           <label className='inputs'>
             <input
               type="number"
@@ -155,7 +151,7 @@ function UpdateSpot() {
               required
             />
           </label>
-          {errors.lng && <p className='errormesg'>{errors.lng}</p>}
+          {errors.lng && <p className='errorMessage'>{errors.lng}</p>}
         </div>
 
         <div id='sectiontwo'>
@@ -169,7 +165,7 @@ function UpdateSpot() {
               required
             />
           </label>
-          {errors.description && <p className='errormesg'>{errors.description}</p>}
+          {errors.description && <p className='errorMessage'>{errors.description}</p>}
         </div>
 
         <div id='sectionthree'>
@@ -183,7 +179,7 @@ function UpdateSpot() {
               required
             />
           </label>
-          {errors.name && <p className='errormesg'>{errors.name}</p>}
+          {errors.name && <p className='errorMessage'>{errors.name}</p>}
         </div>
 
         <div id='sectionfour'>
@@ -197,7 +193,7 @@ function UpdateSpot() {
               required
             />
           </label>
-          {errors.previewImage && <p className='errormesg'>{errors.previewImage}</p>}
+          {errors.previewImage && <p className='errorMessage'>{errors.previewImage}</p>}
         </div>
 
         <div id='sectionfive'>
@@ -225,7 +221,7 @@ function UpdateSpot() {
               />
             </label>
           ))}
-          {errors.spotImages && <p className='errormesg'>{errors.spotImages}</p>}
+          {errors.spotImages && <p className='errorMessage'>{errors.spotImages}</p>}
           <button id="submitbutton" type="submit">Update Spot</button>
         </div>
       </form>

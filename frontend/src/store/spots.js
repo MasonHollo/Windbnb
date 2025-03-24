@@ -92,10 +92,6 @@ export const updateSpotThunk = (spotId, spotData, imageUrls) => async (dispatch)
             body: JSON.stringify({ ...spotData, imageUrls }),
         });
 
-        if (!response.ok) {
-            const errors = await response.json();
-            return { errors };
-        }
 
         const updatedSpot = await response.json();
         updatedSpot.SpotImages = imageUrls.map(url => ({ url })); 
