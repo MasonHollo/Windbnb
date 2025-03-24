@@ -1,0 +1,47 @@
+.modal-content{
+    width: 35%;
+    height: 30%;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 20px
+    
+}
+.deleteModal{
+   
+    justify-self: center;
+    align-items: center;
+}
+#deleteHeader{
+    display: flex;
+    justify-content: center;
+}
+#deleteMsg{
+    display: flex;
+    justify-content: center;
+}
+.noButton{
+    background-color: gray;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    width: 100%;
+    height: 40px;
+    color: white;
+    box-shadow: 4px 4px black;
+
+}
+.yesButton{
+    background-color: salmon;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    width: 100%;
+    height: 40px;
+    color: white;
+    box-shadow: 4px 4px black;
+
+}

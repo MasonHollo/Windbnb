@@ -1,25 +1,27 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchAllSpots } from "../../store/spots";
+import { getAllSpotsThunk } from "../../store/spots"; // Updated thunk name
 import SpotCards from "../subcomponents/spotcards";
-import './SpotsList.css'
+import './SpotsList.css';
 
 const SpotsList = () => {
     const dispatch = useDispatch();
     const spots = useSelector(state => state.spots);
 
     useEffect(() => {
-        dispatch(fetchAllSpots());
-    }, [dispatch]);
+        if (spots.allSpots.length === 0) {
+            dispatch(getAllSpotsThunk());
+        }
+    }, [dispatch, spots.allSpots.length]);
 
-    const spotsExist = spots.allIds && spots.allIds.length > 0;
+    const spotsExist = spots.allSpots && spots.allSpots.length > 0;
 
     return (
         <div className="spotList">
             {spotsExist ? (
-                spots.allIds.map((spotId) => {
-                    const spot = spots.byId[spotId];
-                    return <SpotCards key={spot.id} spot={spot} />;
+                spots.allSpots.map((spot) => {
+                    const spotImage = spot.images && spot.images.length > 0 ? spot.images[0].url : null;
+                    return <SpotCards key={spot.id} spot={spot} spotImage={spotImage} />;
                 })
             ) : (
                 <p>No spots available</p>
