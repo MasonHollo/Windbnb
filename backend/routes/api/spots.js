@@ -33,17 +33,21 @@ const validateSpot = [
     .withMessage('Name must be less than 50 characters'),
   check('description')
     .exists({ checkFalsy: true })
-    .withMessage('Description is required'),
+    .withMessage('Description is required')
+    .isLength({ min: 30 })
+    .withMessage('Description needs 30 or more characters'),
   check('price')
-    .isFloat({ min: 0 })
+  .exists({ checkFalsy: true })
+    .withMessage('Price is required')
+    .isFloat({ min: 1 })
     .withMessage('Price per day must be a positive number'),
     handleValidationErrors
 ];
 
 const validateReview = [
-  check('review')
+  check('comment')
     .exists({ checkFalsy: true })
-    .withMessage("Review text is required"),
+    .withMessage("Comment text is required"),
   check('stars')
     .isFloat({ min: 1, max: 5 })
     .withMessage("Stars must be an integer from 1 to 5"),
@@ -212,12 +216,10 @@ router.get('/:spotId', async (req, res, next) => {
   }
 });
 
-
 //GET ALL SPOTS & QUERY
 router.get('/', validateQueryParams, async (req, res, next) => {
   try {
     let { minLat, maxLat, minLng, maxLng, minPrice, maxPrice, page, size } = req.query;
-
 
     page = parseInt(page);
     size = parseInt(size);
@@ -238,49 +240,41 @@ router.get('/', validateQueryParams, async (req, res, next) => {
 
     const spots = await Spot.findAll({
       where: query,
-      attributes: {
-        include: [
-          [
-            Sequelize.fn("COUNT", Sequelize.col("Reviews.id")),
-            "numReviews",
-          ],
-          [
-            Sequelize.fn("ROUND", Sequelize.fn("AVG", Sequelize.col("Reviews.stars")), 1),
-            "avgRating",
-          ],
-          [
-            Sequelize.fn("MAX", Sequelize.col("SpotImages.url")),
-            "previewImage",
-          ],
-        ]
-      },
+      attributes: [
+        'id',
+        'ownerId',
+        'address',
+        'city',
+        'state',
+        'country',
+        'lat',
+        'lng',
+        'name',
+        'description',
+        'price',
+        [
+          Sequelize.fn("AVG", Sequelize.col("Reviews.stars")),
+          "avgRating",
+        ],
+      ],
       include: [
         {
           model: Review,
           attributes: [],
           required: false,
         },
-        {
+         {
           model: SpotImage,
-          attributes: ["id", "url"],
-          where: { preview: true }, 
-          required: false, 
+          attributes: ['id', 'url', 'preview']
         },
-        {
-          model: User,
-          as: 'Owner',
-          attributes: ['id', 'firstName', 'lastName']
-        }
       ],
-      group: ["Spot.id", "SpotImages.id", "Owner.id"],
+      group: ["Spot.id"],
       limit: size,
       offset: (page - 1) * size,
       subQuery: false,
     });
     
     res.status(200).json({ Spots: spots, page, size });
-    
-    
   } catch (error) {
     next(error);
   }
@@ -313,6 +307,7 @@ router.post('/', requireAuth, validateSpot, async (req, res, next) => {
       price
     });
 
+    // console.log("backend response of create sopot", newSpot)
     return res.status(201).json(newSpot);
   } catch (error) {
     next(error);
@@ -435,7 +430,7 @@ router.post('/:spotId/images', requireAuth, async (req, res, next) => {
 router.post('/:spotId/reviews', requireAuth, validateReview, async (req, res, next) => {
   try {
     const { spotId } = req.params;
-    const { review, stars } = req.body;
+    const { comment, stars } = req.body;
 
     const spot = await Spot.findByPk(spotId)
 
@@ -461,11 +456,21 @@ router.post('/:spotId/reviews', requireAuth, validateReview, async (req, res, ne
     const newReview = await Review.create({
       userId: req.user.id,
       spotId,
-      review,
+      comment,
       stars
     });
 
-    return res.status(201).json(newReview);
+    const reviewWithUser = await Review.findOne({
+      where: { id: newReview.id },
+      include: [
+        {
+          model: User,
+          attributes: ['firstName', 'lastName'],
+        },
+      ],
+    });
+
+    return res.status(201).json(reviewWithUser);
   } catch (error) {
       next(error);
   }

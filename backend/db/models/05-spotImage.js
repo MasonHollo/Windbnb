@@ -28,14 +28,13 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.INTEGER,
         allowNull: true,
         references: { model: 'Users', key: 'id' }
-      
+      },
     },
-  },
     {
       sequelize,
       modelName: 'SpotImage',
-    
     }
   );
   return SpotImage;
 };
+
