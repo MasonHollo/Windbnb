@@ -251,7 +251,12 @@ router.get('/', validateQueryParams, async (req, res, next) => {
             "avgRating",
           ],
           [
-            Sequelize.fn("MAX", Sequelize.col("SpotImages.url")),
+            Sequelize.literal(`(
+              SELECT url FROM "SpotImages"
+              WHERE "SpotImages"."spotId" = "Spot"."id" 
+              AND "SpotImages"."preview" = true 
+              LIMIT 1
+            )`),
             "previewImage",
           ],
         ]
