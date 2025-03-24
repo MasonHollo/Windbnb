@@ -250,15 +250,15 @@ router.get('/', validateQueryParams, async (req, res, next) => {
             Sequelize.fn("ROUND", Sequelize.fn("AVG", Sequelize.col("Reviews.stars")), 1),
             "avgRating",
           ],
-          [
-            Sequelize.literal(`(
-              SELECT url FROM "SpotImages"
-              WHERE "SpotImages"."spotId" = "Spot"."id" 
-              AND "SpotImages"."preview" = true 
-              LIMIT 1
-            )`),
-            "previewImage",
-          ],
+           [
+      Sequelize.literal(`(
+        SELECT url FROM "SpotImages"
+        WHERE "SpotImages"."spotId" = "Spot"."id" 
+        AND "SpotImages"."preview" = true 
+        LIMIT 1
+      )`),
+      "previewImage",
+    ],
         ]
       },
       include: [
@@ -269,7 +269,7 @@ router.get('/', validateQueryParams, async (req, res, next) => {
         },
         {
           model: SpotImage,
-          attributes: [],
+          attributes: ["url"],
           where: { preview: true }, 
           required: false, 
         },
