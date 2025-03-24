@@ -42,7 +42,7 @@ module.exports = {
       },
       //Spot 2
       {
-        url: "https://cdn-dknnf.nitrocdn.com/UULmjgivAAitezmwWhUMIrpfTexQjeUF/assets/images/optimized/rev-3667796/www.littlepalmisland.com/wp-content/uploads/2020/08/island-grand-living-room-horz.jpg",
+        url: "https://cdn-dknnf.nitrocdn.com/UULmjgivAAitezmwWhUMIrpfTexQjeUF/assets/images/optimized/rev-3667796/www.littlepalmisland.com/wp-content/uploads/2024/06/balcony-horz.jpg",
         preview: true,
         spotId: 2,
         userId: 2

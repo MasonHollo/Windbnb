@@ -102,7 +102,7 @@ router.delete('/:reviewId', requireAuth, async (req, res, next) => {
     const { user } = req;
 
 
-    const review = await Spot.findByPk(reviewId);
+    const review = await Review.findByPk(reviewId);
 
     if (!review) {
       return res.status(404).json({
@@ -110,7 +110,7 @@ router.delete('/:reviewId', requireAuth, async (req, res, next) => {
       });
     }
 
-    if (review.ownerId !== user.id) {
+    if (review.userId !== user.id) {
       return res.status(403).json({
         message: "Forbidden"
       });
