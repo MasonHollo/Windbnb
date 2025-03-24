@@ -256,9 +256,6 @@ router.get('/', validateQueryParams, async (req, res, next) => {
           Sequelize.fn("AVG", Sequelize.col("Reviews.stars")),
           "avgRating",
         ],
-        "SpotImages.id",
-        "SpotImages.url",
-        "SpotImages.preview",
       ],
       include: [
         {
@@ -271,7 +268,7 @@ router.get('/', validateQueryParams, async (req, res, next) => {
           attributes: ['id', 'url', 'preview']
         },
       ],
-      group: ["Spot.id", "spotImages.id"],
+      group: ["Spot.id"],
       limit: size,
       offset: (page - 1) * size,
       subQuery: false,
