@@ -42,7 +42,7 @@ module.exports = {
       },
       //Spot 2
       {
-        url: "https://cdn-dknnf.nitrocdn.com/UULmjgivAAitezmwWhUMIrpfTexQjeUF/assets/images/optimized/rev-3667796/www.littlepalmisland.com/wp-content/uploads/2024/06/balcony-horz.jpg",
+        url: "https://a0.muscache.com/im/pictures/3abcfb27-24e7-4570-a923-627160911e81.jpg",
         preview: true,
         spotId: 2,
         userId: 2
