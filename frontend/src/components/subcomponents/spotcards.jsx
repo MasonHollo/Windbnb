@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
 
 function SpotCards({ spot }) {
-
-    const previewImage = spot.previewImage || '';
+  
+    const previewImage = spot.SpotImages && spot.SpotImages.length > 0 ? spot.SpotImages[0].url : '';
 
     return (
         <div>
