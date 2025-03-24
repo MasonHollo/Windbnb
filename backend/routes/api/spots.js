@@ -264,7 +264,7 @@ router.get('/', validateQueryParams, async (req, res, next) => {
         },
         {
           model: SpotImage,
-          attributes: ["id", "url"],
+          attributes: [],
           where: { preview: true }, 
           required: false, 
         },
