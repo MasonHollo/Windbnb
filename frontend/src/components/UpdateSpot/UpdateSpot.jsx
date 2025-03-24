@@ -12,17 +12,17 @@ function UpdateSpot() {
   const spot = useSelector((state) => state.spots.byId[id]);
   console.log(spot)
 
-  const [country, setCountry] = useState(spot?.country || "");
-  const [address, setAddress] = useState(spot?.address || "");
-  const [city, setCity] = useState(spot?.city || "");
-  const [state, setState] = useState(spot?.state || "");
-  const [lat, setLat] = useState(spot?.lat || "");
-  const [lng, setLng] = useState(spot?.lng || "");
-  const [description, setDescription] = useState(spot?.description || "");
-  const [name, setName] = useState(spot?.name || "");
-  const [price, setPrice] = useState(spot?.price || "");
-  const [previewImage, setPreviewImage] = useState(spot?.previewImage || "");
-  const [spotImages, setSpotImages] = useState(spot?.spotImages || ["", "", "", "", ""]);
+  const [country, setCountry] = useState(spot.country || "");
+  const [address, setAddress] = useState(spot.address || "");
+  const [city, setCity] = useState(spot.city || "");
+  const [state, setState] = useState(spot.state || "");
+  const [lat, setLat] = useState(spot.lat || "");
+  const [lng, setLng] = useState(spot.lng || "");
+  const [description, setDescription] = useState(spot.description || "");
+  const [name, setName] = useState(spot.name || "");
+  const [price, setPrice] = useState(spot.price || "");
+  const [previewImage, setPreviewImage] = useState(spot.previewImage || "");
+  const [spotImages, setSpotImages] = useState(spot.spotImages || ["", "", "", "", ""]);
   const [errors, setErrors] = useState({});
 
 
