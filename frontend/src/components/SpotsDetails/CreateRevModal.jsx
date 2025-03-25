@@ -40,7 +40,7 @@ const PostReviewModal = ({ spotId }) => {
                 <option value={4}>⭐⭐⭐⭐</option>
                 <option value={5}>⭐⭐⭐⭐⭐</option>
             </select>
-            <button onClick={handleSubmit} >
+            <button onClick={handleSubmit} disabled={review.length < 10 || stars === 0}>
                 Submit Your Review
             </button>
         </div>

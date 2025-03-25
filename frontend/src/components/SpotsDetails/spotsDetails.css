@@ -103,4 +103,59 @@
   margin-top: 20px;
 }
 
-  
+
+.post-review-modal{
+  /* background-color: aqua; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+/* textarea{
+
+  min-height: 25%;
+  min-width:  50%;
+  border-radius: 2px soild black;
+} */
+
+.deleteReviewModal{
+   height: 100%;
+   width: 100%;
+  justify-self: center;
+  align-items: center;
+}
+#deleteHeader{
+  display: flex;
+  justify-content: center;
+}
+#deleteMsg{
+  display: flex;
+  justify-content: center;
+}
+#canceldelbutton{
+  background-color: gray;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  width: 100%;
+  height: 40px;
+  color: white;
+  box-shadow: 4px 4px black;
+
+}
+#deletebutton{
+  background-color: salmon;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  width: 100%;
+  height: 40px;
+  color: white;
+  box-shadow: 4px 4px black;
+
+}
