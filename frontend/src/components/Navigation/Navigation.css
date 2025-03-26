@@ -15,20 +15,22 @@
     flex-direction: column;
     justify-content: space-around;
     margin-bottom:  -170px;
-
-   
-
 }
+
 .dropdownloggedout{
   width: 120px;
   height: 40px;
+  margin-top: -93px;
+  margin-right: 110px;
 }
 .dropdownloggedin{
   width: 120px;
   height: 130px;
   flex-direction: column;
- 
 
+}
+#modalmenu:hover{
+cursor: pointer;
 }
 
 #homelink {
@@ -63,6 +65,9 @@
   display: block;
   margin: 0 auto;
   color: white;
+}
+#logout:hover{
+  cursor: pointer;
 }
 .loginptag{
 margin-top: .5px;

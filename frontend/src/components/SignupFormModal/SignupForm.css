@@ -32,6 +32,9 @@ input{
     color: white;
     box-shadow: 4px 4px black;
 }
+#submitbutton:hover{
+    cursor: pointer;
+}
 #signuptitle{
     
     display: flex;

@@ -50,8 +50,8 @@ const ManageSpots = () => {
 
     return (
         <>
-        <h1>Manage Your Spots</h1>
-        <button onClick={() => navigate('/spots/new')}> Create A New Spot</button>
+        <h1 id="manageheader">Manage Your Spots</h1>
+        <button id="createaspotbutton" onClick={() => navigate('/spots/new')}> Create A New Spot</button>
    
        
         <div className="spotList">
@@ -61,9 +61,9 @@ const ManageSpots = () => {
                     return (
                         <div key={spot.id} className="spotTile">
                             <SpotCards key={spot.id} spot={spot} spotImage={spotImage} />
-                            <div className="spotActions">
-                                <button onClick={() => handleUpdate(spot.id)}>Update</button>
-                                <button onClick={()=> openDeleteModal(spot.id)}>Delete</button>
+                            <div className="managebuttons">
+                                <button id='updatebutton'onClick={() => handleUpdate(spot.id)}>Update</button>
+                                <button id='delbutton'onClick={()=> openDeleteModal(spot.id)}>Delete</button>
                             </div>
                         </div>
                     );

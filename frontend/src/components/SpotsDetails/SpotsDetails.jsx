@@ -80,7 +80,7 @@ const SpotDetail = () => {
             <div className='reviewsarea'>
                 <h2>{reviewText}</h2>
                 {user && !userHasReviewed && (
-                <button onClick={() => setModalContent(<CreateRevModal spotId={id} />)}>
+                <button id='postreviewbutton' onClick={() => setModalContent(<CreateRevModal spotId={id} />)}>
                 Post Your Review
             </button>
             
