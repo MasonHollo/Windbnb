@@ -2,7 +2,7 @@ form{
     /* background-color: violet; */
     justify-content: center;
     align-items: center;
- 
+    
 }
 
 .createspot{
@@ -10,4 +10,143 @@ form{
  justify-content: center;
  align-items: center;
  display: flex;
+}
+
+#sectionone{
+    /* background-color: teal; */
+    width: 50%;
+    margin: auto;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-bottom: black solid 2px;
+}
+#country{
+    border: black 1.5px solid;
+}
+#city{
+    border: black 1.5px solid;
+    width: 100%;
+}
+#state{
+    border: black 1.5px solid;
+    width: 100%;
+    max-width: 900px;
+}
+#address{
+    border: black 1.5px solid;
+}
+#citystate{
+    display: flex;
+    gap: 5px;
+    width: 100%;
+
+}
+#latlng{
+    display: flex;
+    width: 100%;
+    margin-bottom: 20px;
+    gap: 5px;
+}
+#lat{
+    width: 100%;
+    border: black 1.5px solid;
+
+}
+#lng{
+    width: 100%;
+    border: black 1.5px solid;
+}
+
+#sectiontwo{
+    /* background-color: teal; */
+    width: 50%;
+    margin: auto;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-bottom: black solid 2px;    
+}
+ #description{
+    min-height: 100px;
+    border: black 1.5px solid;
+    margin-bottom: 20px;
+    
+ }
+#sectionthree{
+    /* background-color: teal; */
+    width: 50%;
+    margin: auto;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-bottom: black solid 2px;
+    
+}
+#spotname{
+    border: black 1.5px solid;
+    margin-bottom: 20px; 
+    
+}
+
+#sectionfour{
+    /* background-color: teal; */
+    width: 50%;
+    margin: auto;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-bottom: black solid 2px;
+    
+}
+#cost{
+    border: black 1.5px solid;
+    
+}
+#dollarsign{
+    margin-bottom: 17px;
+    margin-right: 5px;
+}
+
+#sectionfive{
+    /* background-color: teal; */
+    width: 50%;
+    margin: auto;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-bottom: black solid 2px;
+    
+}
+#previmage{
+    border: black 1.5px solid;
+    margin-bottom: 10px;
+}
+#imgs{
+    border: black 1.5px solid;
+    margin-bottom: 10px;
+}
+#createspotbutton{
+    background-color: salmon;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    max-width: 90px;
+    max-height: 30;
+    color: white;
+    box-shadow: 4px 4px black;
+}
+#demospots{
+    background-color: salmon;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    max-width: 90px;
+    max-height: 30;
+    color: white;
+    box-shadow: 4px 4px black;
 }

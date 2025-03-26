@@ -9,11 +9,12 @@
     position: absolute;  
     border: 2px solid black;
     background-color: white;
-    margin-left: -75px;
+    margin-left: 58px;
     padding-left: 10px;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
+    margin-bottom:  -170px;
 
    
 
@@ -67,7 +68,12 @@
 margin-top: .5px;
 margin-bottom: -10px;
 }
-
   
-  
+#profile{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  min-width: 20%;
+}
   
