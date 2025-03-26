@@ -1,4 +1,6 @@
-
+#manageheader{
+    margin-left: 20px;
+}
 .deleteModal{
    
     justify-self: center;
@@ -22,7 +24,14 @@
     height: 40px;
     color: white;
     box-shadow: 4px 4px black;
-
+    cursor: pointer;
+}
+.managebuttons{
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 8px;
+    margin-top: -17px;
 }
 .yesButton{
     background-color: salmon;
@@ -34,5 +43,43 @@
     height: 40px;
     color: white;
     box-shadow: 4px 4px black;
-
+    cursor: pointer;
+}
+#updatebutton{
+cursor: pointer;
+background-color: salmon;
+display: flex;
+justify-content: center;
+align-items: center;
+margin-top: 20px;
+width: 30%;
+height: 20%;
+color: white;
+box-shadow: 4px 4px black;
+}
+#delbutton{
+    cursor: pointer;
+    background-color: salmon;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    width: 30%;
+    height: 20%;
+    color: white;
+    box-shadow: 4px 4px black;
+}
+#createaspotbutton{
+    cursor: pointer;
+    background-color: salmon;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    width: 20%;
+    height: 22px;
+    color: white;
+    box-shadow: 4px 4px black;
+    margin-left: 20px;
+    margin-top: -20px;
 }

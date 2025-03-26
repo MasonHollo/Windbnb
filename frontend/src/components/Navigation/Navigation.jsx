@@ -19,7 +19,7 @@ function Navigation({ isLoaded }) {
       <div id='newspotform'>
         {sessionUser && (
           <NavLink to='/spots/new'>
-        <p>Creat a New Spot</p>
+        <p id='newspotform'>Creat a New Spot</p>
       </NavLink>
 
         )}

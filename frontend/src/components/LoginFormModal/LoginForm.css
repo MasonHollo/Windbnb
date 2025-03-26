@@ -30,6 +30,9 @@
     box-shadow: 4px 4px black;
 
 }
+#loginbutton:hover{
+    cursor: pointer;
+}
 #demologinbutton{
     background-color: salmon;
     display: flex;
@@ -40,6 +43,9 @@
     color: white;
     box-shadow: 4px 4px black;
   
+}
+#demologinbutton:hover{
+cursor: pointer;
 }
 #modal-content{
     width: 35%;
