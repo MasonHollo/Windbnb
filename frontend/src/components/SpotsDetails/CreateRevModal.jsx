@@ -11,6 +11,7 @@ const PostReviewModal = ({ spotId }) => {
     //  const spot = useSelector(state => state.spots.byId[id]);
     const [review, setReviewText] = useState("");  
     const [stars, setStars] = useState(0); 
+    const [hoverStars, setHoverStars] = useState(0);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -34,15 +35,19 @@ const PostReviewModal = ({ spotId }) => {
                 onChange={(e) => setReviewText(e.target.value)}
                 placeholder="Write your review here..."
             />
-            <div id='starholder' value={stars} onChange={(e) => setStars(Number(e.target.value))}>
-                <option className='star' value={1}>⭐</option>
-                <option className='star' value={2}>⭐</option>
-                <option className='star' value={3}>⭐</option>
-                <option className='star' value={4}>⭐</option>
-                <option className='star' value={5}>⭐</option>
-                <p>Stars</p>
+            <div id='starholder'>
+             {[1, 2, 3, 4, 5].map((num) => (
+                    <span 
+                        key={num} 
+                        className={`star ${num <= (hoverStars || stars) ? 'filled' : ''}`}
+                        onMouseEnter={() => setHoverStars(num)}
+                        onMouseLeave={() => setHoverStars(0)}
+                        onClick={() => setStars(num)}
+                    >★</span>
+             ))}
+             <p> Stars</p>
             </div>
-            <button id='submitreview' onClick={handleSubmit}>
+            <button id='submitreview' onClick={handleSubmit} disabled={review.length < 10 || stars === 0}>
                 Submit Your Review
             </button>
         </div>
