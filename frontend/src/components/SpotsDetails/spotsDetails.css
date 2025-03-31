@@ -214,3 +214,33 @@ cursor: pointer;
   margin-left: 20px;
   margin-top: -20px;
 }
+.deleteReviewButton{
+  cursor: pointer;
+  background-color: salmon;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 8%;
+  height: 22px;
+  color: white;
+  box-shadow: 4px 4px black;
+  margin-top: -10px;
+}
+#starholder {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.star {
+  font-size: 24px;
+  color: lightgray;
+  cursor: pointer;
+  transition: color 0.2s ease-in-out;
+}
+
+.star.filled {
+  color: gold;
+}

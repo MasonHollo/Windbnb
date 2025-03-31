@@ -36,7 +36,7 @@ const SpotDetail = () => {
     if (!spot || !spot.SpotImages) {
         return <p>Loading spot details...</p>;
     }
-    
+ 
     const reviewText = reviews.length === 0 ? "⭐ New" : reviews.length === 1 ? `⭐ ${spot.avgRating} · 1 Review ` : `⭐ ${spot.avgRating} · ${reviews.length} Reviews`;
     const userHasReviewed = user && reviews.length > 0 && reviews.some(review => review.userId === user.id);
     const sortedReviews = reviews.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
@@ -98,7 +98,7 @@ const SpotDetail = () => {
                                         onClick={() => handleDeleteReview(review.id)}
                                         className="deleteReviewButton"
                                     >
-                                        Delete Review
+                                        Delete
                                     </button>
                                 )}
                             </div>
